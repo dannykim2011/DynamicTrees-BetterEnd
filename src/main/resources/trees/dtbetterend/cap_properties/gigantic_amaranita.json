@@ -1,0 +1,9 @@
+{
+  "only_if_loaded": "dynamictreesplus",
+  "primitive_cap": "betterend:amaranita_cap",
+  "material_color": "COLOR_ORANGE",
+  "mushroom_item": "betterend:small_amaranita_mushroom",
+  "texture_overrides": {
+    "cap": "betterend:block/amaranita_cap"
+  }
+}
