@@ -1,0 +1,24 @@
+[
+  {
+    "__comment": "Replace BetterEnd's static tree features with dynamic trees.",
+    "select": {
+      "name": "betterend:.*",
+      "tag": "#minecraft:is_end"
+    },
+    "cancellers": {
+      "type": "tree",
+      "namespace": "betterend"
+    }
+  },
+  {
+    "__comment": "Replace the three large BetterEnd mushroom features when DT Plus is available.",
+    "only_if_loaded": "dynamictreesplus",
+    "select": {
+      "name": "betterend:foggy_mushroomland"
+    },
+    "cancellers": {
+      "type": "mushroom",
+      "namespace": "betterend"
+    }
+  }
+]
