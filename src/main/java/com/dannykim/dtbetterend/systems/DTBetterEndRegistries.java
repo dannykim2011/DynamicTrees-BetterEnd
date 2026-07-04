@@ -10,6 +10,7 @@ import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
 import com.ferreusveritas.dynamictrees.deserialisation.PropertyAppliers;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKit;
 import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
+import com.ferreusveritas.dynamictrees.api.worldgen.FeatureCanceller;
 import com.google.gson.JsonElement;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,6 +30,11 @@ public final class DTBetterEndRegistries {
     @SubscribeEvent
     public static void registerGenFeatures(final RegistryEvent<GenFeature> event) {
         ModFeatures.register(event.getRegistry());
+    }
+
+    @SubscribeEvent
+    public static void registerFeatureCancellers(final RegistryEvent<FeatureCanceller> event) {
+        ModFeatureCancellers.register(event.getRegistry());
     }
 
     @SubscribeEvent
