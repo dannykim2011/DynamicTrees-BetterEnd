@@ -13,10 +13,6 @@
     }
   },
   "leaves_properties": "dtbetterend:dragon_tree",
-  "environment_factors": {
-    "is_overworld": 0.95,
-    "is_end": 1.05
-  },
   "perfect_biomes": {
     "name": "betterend:shadow_forest"
   },

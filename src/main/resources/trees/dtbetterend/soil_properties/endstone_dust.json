@@ -1,5 +1,5 @@
 {
-    "primitive_soil":"betterend:end_moss",
+    "primitive_soil":"betterend:endstone_dust",
     "acceptable_soils":[
         "moss_or_dust"
     ],

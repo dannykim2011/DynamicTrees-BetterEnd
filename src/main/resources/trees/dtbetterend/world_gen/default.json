@@ -134,19 +134,42 @@
   {
     "only_if_loaded": "dynamictreesplus",
     "select": {
-      "name": "betterend:foggy_mushroomland"
+      "name": "betterend:umbrella_jungle"
     },
     "apply": {
       "species": {
         "random": {
-          "dtbetterend:mossy_glowshroom": 5,
-          "dtbetterend:jellyshroom": 4,
-          "dtbetterend:gigantic_amaranita": 3
+          "dtbetterend:umbrella_tree": 7,
+          "dtbetterend:jellyshroom": 3
         }
       },
+      "density": [0.75],
+      "chance": 0.9,
+      "forestness": 1.0
+    }
+  },
+  {
+    "only_if_loaded": "dynamictreesplus",
+    "select": {
+      "name": "betterend:foggy_mushroomland"
+    },
+    "apply": {
+      "species": "dtbetterend:mossy_glowshroom",
       "density": [0.72],
       "chance": 0.86,
       "forestness": 1.0
+    }
+  },
+  {
+    "only_if_loaded": "dynamictreesplus",
+    "select": {
+      "name": "betterend:dragon_graveyards"
+    },
+    "apply": {
+      "species": "dtbetterend:gigantic_amaranita",
+      "density": [0.42],
+      "chance": 0.68,
+      "forestness": 0.75
     }
   }
 ]

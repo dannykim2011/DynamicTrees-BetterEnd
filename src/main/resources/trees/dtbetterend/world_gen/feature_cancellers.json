@@ -6,8 +6,7 @@
       "tag": "#minecraft:is_end"
     },
     "cancellers": {
-      "type": "tree",
-      "namespace": "betterend"
+      "type": "dtbetterend:betterend_trees"
     }
   },
   {
@@ -17,8 +16,7 @@
       "name": "betterend:foggy_mushroomland"
     },
     "cancellers": {
-      "type": "mushroom",
-      "namespace": "betterend"
+      "type": "dtbetterend:betterend_fungi"
     }
   }
 ]

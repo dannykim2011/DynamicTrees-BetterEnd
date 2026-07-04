@@ -8,10 +8,6 @@
   "soil_longevity": 18,
   "growth_logic_kit": "dtbetterend:umbrella_tree",
   "leaves_properties": "dtbetterend:umbrella_tree",
-  "environment_factors": {
-    "is_end": 1.05,
-    "is_overworld": 0.75
-  },
   "acceptable_soils": ["moss_or_dust", "pink_moss"],
   "primitive_sapling": "betterend:umbrella_tree_sapling",
   "generate_seed": true,

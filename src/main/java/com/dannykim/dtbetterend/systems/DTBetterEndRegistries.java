@@ -10,6 +10,7 @@ import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
 import com.dtteam.dynamictrees.deserialization.PropertyAppliers;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeature;
+import com.dtteam.dynamictrees.api.worldgen.FeatureCanceller;
 import com.google.gson.JsonElement;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,6 +29,12 @@ public final class DTBetterEndRegistries {
     public static void registerGenFeatures(final RegistryEvent<GenFeature> event) {
         if (!event.isEntryOfType(GenFeature.class)) return;
         ModFeatures.register(event.getRegistry());
+    }
+
+    @SubscribeEvent
+    public static void registerFeatureCancellers(final RegistryEvent<FeatureCanceller> event) {
+        if (!event.isEntryOfType(FeatureCanceller.class)) return;
+        ModFeatureCancellers.register(event.getRegistry());
     }
 
     @SubscribeEvent

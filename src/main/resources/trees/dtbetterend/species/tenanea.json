@@ -11,10 +11,6 @@
         "properties": {
         }
     },
-    "environment_factors":{
-        "is_overworld": 0.95,
-        "is_end": 1.05
-    },
     "perfect_biomes":{
         "name": "betterend:blossoming_spires"
     },
