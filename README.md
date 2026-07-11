@@ -1,28 +1,28 @@
-# Dynamic Trees–Better End
+## Dynamic Trees for BetterEnd
 
 Bring Dynamic Trees support to the trees and giant fungi added by BetterEnd.
 
-This addon integrates BetterEnd's vegetation with Dynamic Trees, allowing
-supported species to grow, branch, and generate using Dynamic Trees' mechanics
-while preserving their distinctive shapes and behavior.
+This addon integrates BetterEnd's vegetation with Dynamic Trees, allowing it to
+behave just like a native Dynamic Trees species. Instead of using BetterEnd's
+standard tree system, supported species will grow, branch, and interact with the
+world using Dynamic Trees' mechanics while preserving the gameplay experience
+intended by BetterEnd.
 
 ## Features
 
-🌳 **Dynamic Trees compatibility for BetterEnd** – Adds dynamically growing
-versions of supported BetterEnd species.
-
-🌿 **Custom growth and world generation** – Preserves each species' characteristic
-height, canopy, branching, and biome placement.
-
-🍄 **Optional giant fungi support** – Enables dynamic BetterEnd fungi when
-Dynamic Trees Plus is installed.
-
-⚡ **Lightweight compatibility addon** – Integrates directly with Dynamic Trees
-without requiring Dynamic Trees Addon Lib.
+* 🌳 **Dynamic Trees compatibility for BetterEnd's trees and fungi** – Makes
+supported BetterEnd species grow, branch, and behave like native Dynamic
+Trees species.
+* ❤️ **Full giant fungi support** – Giant fungi generate and function naturally
+with Dynamic Trees, preserving BetterEnd's intended gameplay and mechanics.
+* 🌱 **Seamless integration** – Includes Dynamic Trees features such as dynamic
+growth, falling trees, seeds, saplings, and world generation compatibility.
+* ⚡ **Lightweight compatibility addon** – Focused solely on integrating
+BetterEnd with Dynamic Trees without changing other gameplay.
 
 ## Requirements
 
 * Dynamic Trees
 * BetterEnd Neoforge
-* Dynamic Trees Plus (optional, recommended for giant fungi)
+* Dynamic Trees Plus
 

@@ -1,13 +1,17 @@
 package com.dannykim.dtbetterend.systems;
 
 import com.dannykim.dtbetterend.DynamicTreesBetterEnd;
-import com.dannykim.dtbetterend.data.EnglishLanguageProvider;
 import com.dannykim.dtbetterend.systems.leaves.FurOuterLeaveProperties;
 import com.dtteam.dynamictrees.event.ApplierRegistryEvent;
 import com.dtteam.dynamictrees.event.RegistryEvent;
 import com.dtteam.dynamictrees.event.TypeRegistryEvent;
 import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
+import com.dtteam.dynamictrees.block.soil.SoilProperties;
+import com.dtteam.dynamictrees.data.GatherDataHelper;
 import com.dtteam.dynamictrees.deserialization.PropertyAppliers;
+import com.dtteam.dynamictrees.tree.family.Family;
+import com.dtteam.dynamictrees.tree.species.Species;
+import com.dtteam.dynamictrees.treepack.Resources;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeature;
 import com.dtteam.dynamictrees.api.worldgen.FeatureCanceller;
@@ -39,10 +43,10 @@ public final class DTBetterEndRegistries {
 
     @SubscribeEvent
     public static void gatherData(final GatherDataEvent event) {
-        event.getGenerator().addProvider(
-                event.includeClient(),
-                new EnglishLanguageProvider(event.getGenerator().getPackOutput())
-        );
+        Resources.MANAGER.gatherData();
+        GatherDataHelper.gatherAllData(DynamicTreesBetterEnd.MOD_ID, event,
+                SoilProperties.REGISTRY, Family.REGISTRY, Species.REGISTRY,
+                LeavesProperties.REGISTRY);
     }
 
     @SubscribeEvent

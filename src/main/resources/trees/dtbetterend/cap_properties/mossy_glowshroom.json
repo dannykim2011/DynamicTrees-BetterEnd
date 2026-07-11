@@ -1,7 +1,7 @@
 {
   "only_if_loaded": "dynamictreesplus",
   "primitive_cap": "betterend:mossy_glowshroom_cap",
-  "material_color": "COLOR_LIGHT_GREEN",
+  "map_color": "COLOR_LIGHT_GREEN",
   "mushroom_item": "betterend:mossy_glowshroom_sapling",
   "texture_overrides": {
     "cap": "betterend:block/mossy_glowshroom_cap"

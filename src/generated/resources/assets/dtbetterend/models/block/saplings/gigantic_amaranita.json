@@ -1,0 +1,8 @@
+{
+  "parent": "dynamictrees:block/smartmodel/mushroom_round",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "cap": "betterend:block/amaranita_cap",
+    "stem": "betterend:block/amaranita_stem_middle"
+  }
+}

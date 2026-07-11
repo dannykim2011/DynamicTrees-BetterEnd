@@ -1,6 +1,6 @@
 {
-    "parent":"dynamictrees:item/standard_seed",
-    "textures":{
-        "layer0":"dtbetterend:item/lucernia_seed"
-    }
+  "parent": "dynamictrees:item/standard_seed",
+  "textures": {
+    "layer0": "dtbetterend:item/lucernia_seed"
+  }
 }

@@ -1,7 +1,7 @@
 {
   "family": "dtbetterend:helix_tree",
   "tapering": 0.25,
-  "signal_energy": 28.0,
+  "signal_energy": 40.0,
   "up_probability": 1,
   "lowest_branch_height": 5,
   "growth_rate": 1.0,

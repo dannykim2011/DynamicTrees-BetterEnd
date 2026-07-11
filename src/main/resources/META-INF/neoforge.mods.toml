@@ -20,6 +20,13 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.dtbetterend]]
+modId="dynamictreesplus"
+type="required"
+versionRange="[${dynamic_trees_plus_version},)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.dtbetterend]]
 modId="minecraft"
 type="required"
 versionRange="${minecraft_version_range}"
@@ -37,12 +44,5 @@ side="BOTH"
 modId="betterend"
 type="required"
 versionRange="[${betterend_version},)"
-ordering="AFTER"
-side="BOTH"
-
-[[dependencies.dtbetterend]]
-modId="dynamictreesplus"
-type="optional"
-versionRange="[${dynamic_trees_plus_version},)"
 ordering="AFTER"
 side="BOTH"

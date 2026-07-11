@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "dtbetterend:gigantic_amaranita_sapling",
+      "required": false
+    },
+    {
+      "id": "dtbetterend:jellyshroom_sapling",
+      "required": false
+    },
+    {
+      "id": "dtbetterend:mossy_glowshroom_sapling",
+      "required": false
+    }
+  ]
+}

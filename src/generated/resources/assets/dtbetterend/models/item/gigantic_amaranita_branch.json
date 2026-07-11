@@ -1,0 +1,7 @@
+{
+  "parent": "dynamictrees:item/branch",
+  "textures": {
+    "bark": "betterend:block/amaranita_stem_middle",
+    "rings": "betterend:block/amaranita_stem_top"
+  }
+}
