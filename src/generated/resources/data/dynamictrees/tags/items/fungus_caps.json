@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "dtbetterend:gigantic_amaranita_seed",
+      "required": false
+    },
+    {
+      "id": "dtbetterend:jellyshroom_seed",
+      "required": false
+    },
+    {
+      "id": "dtbetterend:mossy_glowshroom_seed",
+      "required": false
+    }
+  ]
+}

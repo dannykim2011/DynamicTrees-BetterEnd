@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "dtbetterend:gigantic_amaranita_branch",
+      "required": false
+    },
+    {
+      "id": "dtbetterend:jellyshroom_branch",
+      "required": false
+    },
+    {
+      "id": "dtbetterend:mossy_glowshroom_branch",
+      "required": false
+    }
+  ]
+}

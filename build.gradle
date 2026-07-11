@@ -84,8 +84,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:dynamictrees-252818:${dynamic_trees_file_id}")
     implementation fg.deobf("curse.maven:betterend-forge-1435127:${betterend_file_id}")
-    compileOnly fg.deobf("curse.maven:dynamictreesplus-478155:${dynamic_trees_plus_file_id}")
-    runtimeOnly fg.deobf("curse.maven:dynamictreesplus-478155:${dynamic_trees_plus_file_id}")
+    implementation fg.deobf("curse.maven:dynamictreesplus-478155:${dynamic_trees_plus_file_id}")
     implementation fg.deobf("curse.maven:bclib-forge-1435106:${bclib_forge_file_id}")
     runtimeOnly fg.deobf("curse.maven:wunderlib-forge-1435097:${wunderlib_forge_file_id}")
 }

@@ -1,13 +1,17 @@
 package com.dannykim.dtbetterend.systems;
 
 import com.dannykim.dtbetterend.DynamicTreesBetterEnd;
-import com.dannykim.dtbetterend.data.EnglishLanguageProvider;
 import com.dannykim.dtbetterend.systems.leaves.FurOuterLeaveProperties;
 import com.ferreusveritas.dynamictrees.api.applier.ApplierRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryEvent;
 import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
 import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.block.rooty.SoilProperties;
+import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
 import com.ferreusveritas.dynamictrees.deserialisation.PropertyAppliers;
+import com.ferreusveritas.dynamictrees.tree.family.Family;
+import com.ferreusveritas.dynamictrees.tree.species.Species;
+import com.ferreusveritas.dynamictrees.resources.Resources;
 import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKit;
 import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
 import com.ferreusveritas.dynamictrees.api.worldgen.FeatureCanceller;
@@ -39,10 +43,10 @@ public final class DTBetterEndRegistries {
 
     @SubscribeEvent
     public static void gatherData(final GatherDataEvent event) {
-        event.getGenerator().addProvider(
-                event.includeClient(),
-                new EnglishLanguageProvider(event.getGenerator().getPackOutput())
-        );
+        Resources.MANAGER.gatherData();
+        GatherDataHelper.gatherAllData(DynamicTreesBetterEnd.MOD_ID, event,
+                SoilProperties.REGISTRY, Family.REGISTRY, Species.REGISTRY,
+                LeavesProperties.REGISTRY);
     }
 
     @SubscribeEvent
