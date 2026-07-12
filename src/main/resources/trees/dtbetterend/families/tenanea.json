@@ -5,5 +5,11 @@
     "primitive_stripped_log":"betterend:tenanea_stripped_log",
     "max_branch_radius": 24,
     "generate_surface_root": true,
-    "max_signal_depth": 32
+    "max_signal_depth": 32,
+    "texture_overrides": {
+        "branch": "betterend:block/tenanea_log_side",
+        "branch_top": "betterend:block/tenanea_log_top",
+        "stripped_branch": "betterend:block/tenanea_stripped_log_side",
+        "stripped_branch_top": "betterend:block/tenanea_stripped_log_top"
+    }
 }
