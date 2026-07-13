@@ -1,4 +1,4 @@
-[
+﻿[
     {
         "__comment":  "Replace BetterEnd\u0027s static tree features with dynamic trees.",
         "select":  {
@@ -20,6 +20,7 @@
                    },
         "cancellers":  {
                            "type":  "dtbetterend:betterend_fungi"
-                       }
+                       },
+        "only_if_loaded":  "dynamictreesplus"
     }
 ]

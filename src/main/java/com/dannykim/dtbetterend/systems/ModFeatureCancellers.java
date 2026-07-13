@@ -5,6 +5,7 @@ import com.dannykim.dtbetterend.worldgen.FeatureTypeCanceller;
 import com.dtteam.dynamictrees.api.registry.Registry;
 import com.dtteam.dynamictrees.api.worldgen.FeatureCanceller;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.ModList;
 
 import java.util.Set;
 
@@ -37,6 +38,9 @@ public final class ModFeatureCancellers {
     }
 
     public static void register(final Registry<FeatureCanceller> registry) {
-        registry.registerAll(BETTEREND_TREES, BETTEREND_FUNGI);
+        registry.register(BETTEREND_TREES);
+        if (ModList.get().isLoaded("dynamictreesplus")) {
+            registry.register(BETTEREND_FUNGI);
+        }
     }
 }

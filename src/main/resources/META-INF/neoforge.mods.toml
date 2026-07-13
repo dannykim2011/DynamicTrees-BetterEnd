@@ -21,7 +21,7 @@ side="BOTH"
 
 [[dependencies.dtbetterend]]
 modId="dynamictreesplus"
-type="required"
+type="optional"
 versionRange="[${dynamic_trees_plus_version},)"
 ordering="AFTER"
 side="BOTH"
@@ -46,3 +46,4 @@ type="required"
 versionRange="[${betterend_version},)"
 ordering="AFTER"
 side="BOTH"
+
