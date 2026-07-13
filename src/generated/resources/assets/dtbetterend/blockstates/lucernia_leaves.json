@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "betterend:block/lucernia_leaves"
+      "model": "betterend:block/lucernia_leaves_1"
     }
   }
 }

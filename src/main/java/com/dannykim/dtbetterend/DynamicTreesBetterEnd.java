@@ -2,6 +2,7 @@ package com.dannykim.dtbetterend;
 
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -11,9 +12,11 @@ public final class DynamicTreesBetterEnd {
 
     public DynamicTreesBetterEnd() {
         RegistryHandler.setup(MOD_ID);
-        FMLJavaModLoadingContext.get().getModEventBus().register(
-                com.dannykim.dtbetterend.systems.mushroom.DTPlusRegistries.class
-        );
+        if (ModList.get().isLoaded("dynamictreesplus")) {
+            FMLJavaModLoadingContext.get().getModEventBus().register(
+                    com.dannykim.dtbetterend.systems.mushroom.DTPlusRegistries.class
+            );
+        }
     }
 
     public static ResourceLocation location(final String path) {
