@@ -4,12 +4,12 @@ import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKitConfiguration;
 import com.dtteam.dynamictrees.systems.growthlogic.context.DirectionManipulationContext;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public final class HelixTreeLogic extends GrowthLogicKit {
     private static final Direction[] TURN = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 
-    public HelixTreeLogic(final ResourceLocation registryName) {
+    public HelixTreeLogic(final Identifier registryName) {
         super(registryName);
     }
 

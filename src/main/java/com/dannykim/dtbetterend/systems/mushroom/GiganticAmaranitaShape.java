@@ -1,12 +1,12 @@
 package com.dannykim.dtbetterend.systems.mushroom;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * Age-sensitive dome that becomes a thick, flatter mature Amaranita cap.
  */
 final class GiganticAmaranitaShape extends ProfiledMushroomShape {
-    GiganticAmaranitaShape(final ResourceLocation name) {
+    GiganticAmaranitaShape(final Identifier name) {
         super(name);
     }
 

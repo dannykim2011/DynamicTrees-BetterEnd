@@ -4,14 +4,14 @@ import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKitConfiguration;
 import com.dtteam.dynamictrees.systems.growthlogic.context.DirectionManipulationContext;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * A low, broad multi-stem tree. Branches leave the base early and terminate
  * before they can acquire the height of Lucernia.
  */
 public final class TenaneaLogic extends GrowthLogicKit {
-    public TenaneaLogic(final ResourceLocation name) {
+    public TenaneaLogic(final Identifier name) {
         super(name);
     }
 

@@ -4,14 +4,14 @@ import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKitConfiguration;
 import com.dtteam.dynamictrees.systems.growthlogic.context.DirectionManipulationContext;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * Produces 3-6 ascending stems radiating from a shared low base, matching the
  * curved fan of the original Lucernia spline.
  */
 public final class LucerniaLogic extends GrowthLogicKit {
-    public LucerniaLogic(final ResourceLocation name) {
+    public LucerniaLogic(final Identifier name) {
         super(name);
     }
 

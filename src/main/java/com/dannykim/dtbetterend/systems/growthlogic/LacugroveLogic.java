@@ -4,14 +4,14 @@ import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKitConfiguration;
 import com.dtteam.dynamictrees.systems.growthlogic.context.DirectionManipulationContext;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * Lacugrove is deliberately not a spreading tree: one 15-25 block bole supports
  * a dense, rounded crown centred near the upper fifth of the trunk.
  */
 public final class LacugroveLogic extends GrowthLogicKit {
-    public LacugroveLogic(final ResourceLocation name) {
+    public LacugroveLogic(final Identifier name) {
         super(name);
     }
 

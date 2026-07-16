@@ -15,7 +15,7 @@ config="dtbetterend.mixins.json"
 [[dependencies.dtbetterend]]
 modId="neoforge"
 type="required"
-versionRange="[21.1,)"
+versionRange="[26.1.2,)"
 ordering="NONE"
 side="BOTH"
 

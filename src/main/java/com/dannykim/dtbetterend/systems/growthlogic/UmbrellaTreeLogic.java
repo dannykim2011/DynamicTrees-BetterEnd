@@ -4,10 +4,10 @@ import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKitConfiguration;
 import com.dtteam.dynamictrees.systems.growthlogic.context.DirectionManipulationContext;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public final class UmbrellaTreeLogic extends GrowthLogicKit {
-    public UmbrellaTreeLogic(final ResourceLocation registryName) {
+    public UmbrellaTreeLogic(final Identifier registryName) {
         super(registryName);
     }
 

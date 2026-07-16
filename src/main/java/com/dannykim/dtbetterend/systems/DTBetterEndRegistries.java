@@ -44,9 +44,15 @@ public final class DTBetterEndRegistries {
     @SubscribeEvent
     public static void gatherData(final GatherDataEvent event) {
         Resources.MANAGER.gatherData();
-        GatherDataHelper.gatherAllData(DynamicTreesBetterEnd.MOD_ID, event,
-                SoilProperties.REGISTRY, Family.REGISTRY, Species.REGISTRY,
-                LeavesProperties.REGISTRY);
+        if (event instanceof GatherDataEvent.Client clientEvent) {
+            GatherDataHelper.gatherClientData(DynamicTreesBetterEnd.MOD_ID, clientEvent,
+                    SoilProperties.REGISTRY, Family.REGISTRY, Species.REGISTRY,
+                    LeavesProperties.REGISTRY);
+        } else if (event instanceof GatherDataEvent.Server serverEvent) {
+            GatherDataHelper.gatherServerData(DynamicTreesBetterEnd.MOD_ID, serverEvent,
+                    SoilProperties.REGISTRY, Family.REGISTRY, Species.REGISTRY,
+                    LeavesProperties.REGISTRY);
+        }
     }
 
     @SubscribeEvent

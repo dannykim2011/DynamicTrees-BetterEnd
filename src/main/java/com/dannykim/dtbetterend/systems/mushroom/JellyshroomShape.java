@@ -1,12 +1,12 @@
 package com.dannykim.dtbetterend.systems.mushroom;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * A shallow, broad membrane with a softly dropped rim.
  */
 final class JellyshroomShape extends ProfiledMushroomShape {
-    JellyshroomShape(final ResourceLocation name) {
+    JellyshroomShape(final Identifier name) {
         super(name);
     }
 

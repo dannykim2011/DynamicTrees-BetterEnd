@@ -7,7 +7,7 @@ import com.dtteam.dynamictrees.tree.species.Species;
 import com.dtteam.dynamictrees.utility.CoordUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.LevelAccessor;
@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public final class FlowerVinesGenFeature extends VinesGenFeature {
-    public FlowerVinesGenFeature(final ResourceLocation registryName) {
+    public FlowerVinesGenFeature(final Identifier registryName) {
         super(registryName);
     }
 
@@ -29,7 +29,7 @@ public final class FlowerVinesGenFeature extends VinesGenFeature {
         final BlockPos.MutableBlockPos cursor = vinePos.mutable();
         do {
             cursor.move(Direction.DOWN);
-            if (cursor.getY() <= level.getMinBuildHeight()) {
+            if (cursor.getY() <= level.getMinY()) {
                 return BlockPos.ZERO;
             }
         } while (level.isEmptyBlock(cursor)

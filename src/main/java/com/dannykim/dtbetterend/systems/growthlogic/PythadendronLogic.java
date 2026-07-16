@@ -4,14 +4,14 @@ import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKitConfiguration;
 import com.dtteam.dynamictrees.systems.growthlogic.context.DirectionManipulationContext;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * Enforces alternating paired forks. Each tier turns ninety degrees from the
  * previous tier, reproducing Pythadendron's recursive binary crown.
  */
 public final class PythadendronLogic extends GrowthLogicKit {
-    public PythadendronLogic(final ResourceLocation name) {
+    public PythadendronLogic(final Identifier name) {
         super(name);
     }
 

@@ -8,7 +8,7 @@ import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
 import com.dtteam.dynamictrees.utility.CoordUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
@@ -26,13 +26,13 @@ public class FurOuterLeaveProperties extends LeavesProperties {
 
     public Block outer = Blocks.AIR;
 
-    public FurOuterLeaveProperties(ResourceLocation registryName) {
+    public FurOuterLeaveProperties(Identifier registryName) {
         super(registryName);
     }
 
     @Nonnull
     protected DynamicLeavesBlock createDynamicLeaves(@Nonnull BlockBehaviour.Properties properties) {
-        return new DynamicLeavesBlock(this, properties) {
+        return new DynamicLeavesBlock(getRegistryName(), this, properties) {
             List<Direction> ALL = List.of(Direction.DOWN, Direction.UP, Direction.SOUTH, Direction.WEST, Direction.NORTH, Direction.EAST);
 
 

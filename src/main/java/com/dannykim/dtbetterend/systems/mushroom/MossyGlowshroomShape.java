@@ -1,13 +1,13 @@
 package com.dannykim.dtbetterend.systems.mushroom;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * Deep flared cone: narrow near the stem and rapidly descending toward the
  * twelve-lobed outer rim of BetterEnd's glowshroom.
  */
 final class MossyGlowshroomShape extends ProfiledMushroomShape {
-    MossyGlowshroomShape(final ResourceLocation name) {
+    MossyGlowshroomShape(final Identifier name) {
         super(name);
     }
 

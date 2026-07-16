@@ -5,13 +5,13 @@ import com.dtteam.dynamictreesplus.systems.mushroomlogic.MushroomShapeConfigurat
 import com.dtteam.dynamictreesplus.systems.mushroomlogic.context.MushroomCapContext;
 import com.dtteam.dynamictreesplus.systems.mushroomlogic.shapekits.MushroomShapeKit;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.LinkedList;
 import java.util.List;
 
 abstract class ProfiledMushroomShape extends MushroomShapeKit {
-    protected ProfiledMushroomShape(final ResourceLocation name) {
+    protected ProfiledMushroomShape(final Identifier name) {
         super(name);
     }
 
