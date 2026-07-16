@@ -1,0 +1,21 @@
+{
+  "sources": [
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/dragon_tree_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/dragon_tree_stripped_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/amaranita_stem_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/helix_tree_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/helix_tree_stripped_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/jellyshroom_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/lacugrove_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/lacugrove_stripped_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/lucernia_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/lucernia_stripped_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/mossy_glowshroom_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/pythadendron_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/pythadendron_stripped_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/tenanea_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/tenanea_stripped_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/umbrella_tree_log_top" },
+    { "type": "dynamictrees:thick_branch_rings", "resource": "betterend:block/umbrella_tree_stripped_log_top" }
+  ]
+}

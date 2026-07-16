@@ -5,7 +5,10 @@ import com.ferreusveritas.dynamictrees.api.worldgen.FeatureCanceller;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.Set;
 
 public final class FeatureTypeCanceller extends FeatureCanceller {
@@ -21,9 +24,33 @@ public final class FeatureTypeCanceller extends FeatureCanceller {
             final ConfiguredFeature<?, ?> configuredFeature,
             final BiomePropertySelectors.NormalFeatureCancellation cancellations
     ) {
-        return configuredFeature.getFeatures().anyMatch(feature -> {
-            final ResourceLocation featureType = BuiltInRegistries.FEATURE.getKey(feature.feature());
-            return featureType != null && this.featureTypes.contains(featureType);
-        });
+        return matchesFeatureTree(configuredFeature, Collections.newSetFromMap(new IdentityHashMap<>()));
+    }
+
+    private boolean matchesFeatureType(final ConfiguredFeature<?, ?> configuredFeature) {
+        final ResourceLocation featureType = BuiltInRegistries.FEATURE.getKey(configuredFeature.feature());
+        return featureType != null && this.featureTypes.contains(featureType);
+    }
+
+    private boolean matchesFeatureTree(
+            final ConfiguredFeature<?, ?> configuredFeature,
+            final Set<ConfiguredFeature<?, ?>> seen
+    ) {
+        if (!seen.add(configuredFeature)) {
+            return false;
+        }
+        return matchesFeatureType(configuredFeature)
+                || configuredFeature.getFeatures().anyMatch(feature -> matchesFeatureTree(feature, seen))
+                || matchesRandomPatchTarget(configuredFeature, seen);
+    }
+
+    private boolean matchesRandomPatchTarget(
+            final ConfiguredFeature<?, ?> configuredFeature,
+            final Set<ConfiguredFeature<?, ?>> seen
+    ) {
+        if (!(configuredFeature.config() instanceof RandomPatchConfiguration randomPatch)) {
+            return false;
+        }
+        return randomPatch.feature().value().getFeatures().anyMatch(feature -> matchesFeatureTree(feature, seen));
     }
 }

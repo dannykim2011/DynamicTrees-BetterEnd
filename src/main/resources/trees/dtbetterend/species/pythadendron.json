@@ -21,7 +21,6 @@
         "name": "betterend:chorus_forest"
     },
     "acceptable_soils": ["chorus_nylium"],
-    "acceptable_growth_blocks": ["minecraft:chorus_plant","minecraft:chorus_flower"],
     "primitive_sapling":"betterend:pythadendron_sapling",
     "always_show_on_waila":false,
     "generate_seed":true,
