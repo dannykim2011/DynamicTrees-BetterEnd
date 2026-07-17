@@ -1,7 +1,0 @@
-{
-  "loader": "dynamictrees:branch",
-  "textures": {
-    "bark": "betterend:block/jellyshroom_log_side",
-    "rings": "betterend:block/jellyshroom_log_top"
-  }
-}
