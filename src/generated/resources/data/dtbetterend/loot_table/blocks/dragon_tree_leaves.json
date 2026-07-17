@@ -40,7 +40,8 @@
               "name": "betterend:dragon_tree_leaves"
             },
             {
-              "type": "dynamictrees:seed_item",
+              "type": "minecraft:item",
+              "name": "dtbetterend:dragon_tree_seed",
               "conditions": [
                 {
                   "condition": "minecraft:survives_explosion"
