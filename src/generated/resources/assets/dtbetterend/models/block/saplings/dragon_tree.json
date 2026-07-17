@@ -1,0 +1,8 @@
+{
+  "parent": "dtbetterend:block/smartmodel/sapling_no_tint",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "leaves": "betterend:block/dragon_tree_leaves",
+    "log": "betterend:block/dragon_tree_log_side"
+  }
+}

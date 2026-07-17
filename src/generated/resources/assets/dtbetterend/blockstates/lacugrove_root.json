@@ -1,0 +1,10 @@
+﻿{
+  "variants": {
+    "": {
+      "type": "dynamictrees:surface_root",
+      "textures": {
+        "bark": "betterend:block/lacugrove_log_side"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "common_leaves": "dtbetterend:umbrella_tree",
+  "common_species": "dtbetterend:umbrella_tree",
+  "primitive_log": "betterend:umbrella_tree_log",
+  "primitive_stripped_log": "betterend:umbrella_tree_stripped_log",
+  "max_branch_radius": 16,
+  "max_signal_depth": 64,
+  "generate_surface_root": true,
+  "texture_overrides": {
+    "branch": "betterend:block/umbrella_tree_log_side",
+    "branch_top": "betterend:block/umbrella_tree_log_top",
+    "stripped_branch": "betterend:block/umbrella_tree_stripped_log_side",
+    "stripped_branch_top": "betterend:block/umbrella_tree_stripped_log_top"
+  }
+}
