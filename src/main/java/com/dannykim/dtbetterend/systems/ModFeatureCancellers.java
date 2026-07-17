@@ -34,6 +34,12 @@ public final class ModFeatureCancellers {
             )
     );
 
+
+    public static final FeatureCanceller BETTEREND_CACTI = new FeatureTypeCanceller(
+            DynamicTreesBetterEnd.location("betterend_cacti"),
+            Set.of(ResourceLocation.tryBuild("betterend", "neon_cactus"))
+    );
+
     private ModFeatureCancellers() {
     }
 
@@ -41,6 +47,7 @@ public final class ModFeatureCancellers {
         registry.register(BETTEREND_TREES);
         if (ModList.get().isLoaded("dynamictreesplus")) {
             registry.register(BETTEREND_FUNGI);
+            registry.register(BETTEREND_CACTI);
         }
     }
 }

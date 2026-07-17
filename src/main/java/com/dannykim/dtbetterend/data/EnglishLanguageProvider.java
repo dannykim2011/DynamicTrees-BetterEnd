@@ -18,6 +18,7 @@ public final class EnglishLanguageProvider extends LanguageProvider {
         add("item.dtbetterend.lacugrove_seed", "Lacugrove Seed");
         add("item.dtbetterend.lucernia_seed", "Lucernia Seed");
         add("item.dtbetterend.mossy_glowshroom_seed", "Mossy Glowshroom Spore");
+        add("item.dtbetterend.neon_cactus_seed", "Neon Cactus Seed");
         add("item.dtbetterend.pythadendron_seed", "Pythadendron Seed");
         add("item.dtbetterend.tenanea_seed", "Tenanea Seed");
         add("item.dtbetterend.umbrella_tree_seed", "Umbrella Tree Cone");

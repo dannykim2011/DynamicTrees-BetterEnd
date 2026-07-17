@@ -1,42 +1,52 @@
-﻿[
-    {
-        "__comment":  "Replace BetterEnd\u0027s static tree features with dynamic trees.",
-        "select":  {
-                       "name":  "betterend:.*",
-                       "tag":  "#minecraft:is_end"
-                   },
-        "cancellers":  {
-                           "type":  "dtbetterend:betterend_trees"
-                       }
+[
+  {
+    "__comment": "Replace BetterEnd's static tree features with dynamic trees.",
+    "select": {
+      "name": "betterend:.*",
+      "tag": "#minecraft:is_end"
     },
-    {
-        "__comment":  "Replace BetterEnd large fungi in umbrella_jungle when DT Plus is available.",
-        "select":  {
-                       "name":  "betterend:umbrella_jungle"
-                   },
-        "cancellers":  {
-                           "type":  "dtbetterend:betterend_fungi"
-                       },
-        "only_if_loaded":  "dynamictreesplus"
-    },
-    {
-        "__comment":  "Replace BetterEnd large fungi in foggy_mushroomland when DT Plus is available.",
-        "select":  {
-                       "name":  "betterend:foggy_mushroomland"
-                   },
-        "cancellers":  {
-                           "type":  "dtbetterend:betterend_fungi"
-                       },
-        "only_if_loaded":  "dynamictreesplus"
-    },
-    {
-        "__comment":  "Replace BetterEnd large fungi in dragon_graveyards when DT Plus is available.",
-        "select":  {
-                       "name":  "betterend:dragon_graveyards"
-                   },
-        "cancellers":  {
-                           "type":  "dtbetterend:betterend_fungi"
-                       },
-        "only_if_loaded":  "dynamictreesplus"
+    "cancellers": {
+      "type": "dtbetterend:betterend_trees"
     }
+  },
+  {
+    "__comment": "Replace BetterEnd large fungi in umbrella_jungle when DT Plus is available.",
+    "select": {
+      "name": "betterend:umbrella_jungle"
+    },
+    "cancellers": {
+      "type": "dtbetterend:betterend_fungi"
+    },
+    "only_if_loaded": "dynamictreesplus"
+  },
+  {
+    "__comment": "Replace BetterEnd large fungi in foggy_mushroomland when DT Plus is available.",
+    "select": {
+      "name": "betterend:foggy_mushroomland"
+    },
+    "cancellers": {
+      "type": "dtbetterend:betterend_fungi"
+    },
+    "only_if_loaded": "dynamictreesplus"
+  },
+  {
+    "__comment": "Replace BetterEnd large fungi in dragon_graveyards when DT Plus is available.",
+    "select": {
+      "name": "betterend:dragon_graveyards"
+    },
+    "cancellers": {
+      "type": "dtbetterend:betterend_fungi"
+    },
+    "only_if_loaded": "dynamictreesplus"
+  },
+  {
+    "__comment": "Replace BetterEnd neon cactus when DT Plus is available.",
+    "only_if_loaded": "dynamictreesplus",
+    "select": {
+      "name": "betterend:neon_oasis"
+    },
+    "cancellers": {
+      "type": "dtbetterend:betterend_cacti"
+    }
+  }
 ]
