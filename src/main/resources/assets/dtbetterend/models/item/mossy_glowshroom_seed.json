@@ -1,5 +1,5 @@
 {
-  "parent": "dynamictrees:item/standard_seed",
+  "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "dtbetterend:item/mossy_glowshroom_seed"
   }
