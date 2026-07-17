@@ -1,7 +1,10 @@
 {
-  "variants": {
-    "": {
-      "model": "dtbetterend:block/dragon_tree_root"
-    }
-  }
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:surface_root",
+                              "textures":  {
+                                               "bark":  "betterend:block/dragon_tree_log_side"
+                                           }
+                          }
+                 }
 }

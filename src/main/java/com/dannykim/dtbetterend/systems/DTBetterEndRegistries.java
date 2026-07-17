@@ -6,19 +6,13 @@ import com.dtteam.dynamictrees.event.ApplierRegistryEvent;
 import com.dtteam.dynamictrees.event.RegistryEvent;
 import com.dtteam.dynamictrees.event.TypeRegistryEvent;
 import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
-import com.dtteam.dynamictrees.block.soil.SoilProperties;
-import com.dtteam.dynamictrees.data.GatherDataHelper;
 import com.dtteam.dynamictrees.deserialization.PropertyAppliers;
-import com.dtteam.dynamictrees.tree.family.Family;
-import com.dtteam.dynamictrees.tree.species.Species;
-import com.dtteam.dynamictrees.treepack.Resources;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeature;
 import com.dtteam.dynamictrees.api.worldgen.FeatureCanceller;
 import com.google.gson.JsonElement;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 public final class DTBetterEndRegistries {
     private DTBetterEndRegistries() {
     }
@@ -39,20 +33,6 @@ public final class DTBetterEndRegistries {
     public static void registerFeatureCancellers(final RegistryEvent<FeatureCanceller> event) {
         if (!event.isEntryOfType(FeatureCanceller.class)) return;
         ModFeatureCancellers.register(event.getRegistry());
-    }
-
-    @SubscribeEvent
-    public static void gatherData(final GatherDataEvent event) {
-        Resources.MANAGER.gatherData();
-        if (event instanceof GatherDataEvent.Client clientEvent) {
-            GatherDataHelper.gatherClientData(DynamicTreesBetterEnd.MOD_ID, clientEvent,
-                    SoilProperties.REGISTRY, Family.REGISTRY, Species.REGISTRY,
-                    LeavesProperties.REGISTRY);
-        } else if (event instanceof GatherDataEvent.Server serverEvent) {
-            GatherDataHelper.gatherServerData(DynamicTreesBetterEnd.MOD_ID, serverEvent,
-                    SoilProperties.REGISTRY, Family.REGISTRY, Species.REGISTRY,
-                    LeavesProperties.REGISTRY);
-        }
     }
 
     @SubscribeEvent

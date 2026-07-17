@@ -1,7 +1,12 @@
 {
-  "variants": {
-    "": {
-      "model": "dtbetterend:block/stripped_tenanea_branch"
-    }
-  }
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:branch",
+                              "family":  "dtbetterend:tenanea",
+                              "textures":  {
+                                               "bark":  "betterend:block/tenanea_stripped_log_side",
+                                               "rings":  "betterend:block/tenanea_stripped_log_top"
+                                           }
+                          }
+                 }
 }

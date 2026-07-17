@@ -1,7 +1,12 @@
 {
-  "variants": {
-    "": {
-      "model": "dtbetterend:block/lacugrove_branch"
-    }
-  }
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:branch",
+                              "family":  "dtbetterend:lacugrove",
+                              "textures":  {
+                                               "bark":  "betterend:block/lacugrove_log_side",
+                                               "rings":  "betterend:block/lacugrove_log_top"
+                                           }
+                          }
+                 }
 }

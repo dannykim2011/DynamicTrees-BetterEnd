@@ -1,7 +1,12 @@
 {
-  "variants": {
-    "": {
-      "model": "dtbetterend:block/lucernia_branch"
-    }
-  }
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:branch",
+                              "family":  "dtbetterend:lucernia",
+                              "textures":  {
+                                               "bark":  "betterend:block/lucernia_log_side",
+                                               "rings":  "betterend:block/lucernia_log_top"
+                                           }
+                          }
+                 }
 }

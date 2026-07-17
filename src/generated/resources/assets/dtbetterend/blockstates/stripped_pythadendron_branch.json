@@ -1,7 +1,12 @@
 {
-  "variants": {
-    "": {
-      "model": "dtbetterend:block/stripped_pythadendron_branch"
-    }
-  }
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:branch",
+                              "family":  "dtbetterend:pythadendron",
+                              "textures":  {
+                                               "bark":  "betterend:block/pythadendron_stripped_log_side",
+                                               "rings":  "betterend:block/pythadendron_stripped_log_top"
+                                           }
+                          }
+                 }
 }

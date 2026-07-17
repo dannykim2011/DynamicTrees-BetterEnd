@@ -1,7 +1,10 @@
 {
-  "variants": {
-    "": {
-      "model": "dtbetterend:block/helix_tree_root"
-    }
-  }
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:surface_root",
+                              "textures":  {
+                                               "bark":  "betterend:block/helix_tree_log_side"
+                                           }
+                          }
+                 }
 }

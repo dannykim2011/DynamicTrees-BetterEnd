@@ -1,7 +1,10 @@
 {
-  "variants": {
-    "": {
-      "model": "dtbetterend:block/pythadendron_root"
-    }
-  }
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:surface_root",
+                              "textures":  {
+                                               "bark":  "betterend:block/pythadendron_log_side"
+                                           }
+                          }
+                 }
 }

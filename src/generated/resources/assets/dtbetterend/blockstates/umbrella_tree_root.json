@@ -1,7 +1,10 @@
 {
-  "variants": {
-    "": {
-      "model": "dtbetterend:block/umbrella_tree_root"
-    }
-  }
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:surface_root",
+                              "textures":  {
+                                               "bark":  "betterend:block/umbrella_tree_log_side"
+                                           }
+                          }
+                 }
 }
