@@ -49,6 +49,10 @@ sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 
+sourceSets.main.java {
+    exclude 'com/dtteam/dynamictreesplus/**'
+}
+
 neoForge {
     version = project.neo_version
 
@@ -97,7 +101,9 @@ neoForge {
 }
 
 dependencies {
+    def dynamicTreesPlusJar = file('../DynamicTreesPlus 26.1.2/build/libs/dynamictreesplus-26.1.2-1.3.2.jar')
     implementation "com.dtteam.dynamictrees:dynamictrees-neoforge-${minecraft_version}:${dynamic_trees_version}"
+    compileOnly files(dynamicTreesPlusJar)
     implementation "curse.maven:betterend-neoforge-1422294:${betterend_file_id}"
     implementation "curse.maven:bclib-neoforge-1422283:${bclib_file_id}"
     implementation "curse.maven:worldweaver-neoforge-1422284:${worldweaver_file_id}"
@@ -111,6 +117,9 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.withType(ProcessResources).configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    exclude 'assets/dynamictreesplus/**'
+    exclude 'data/dynamictreesplus/**'
+    exclude 'trees/dynamictreesplus/**'
 
     def replaceProperties = [
             loader_version_range       : loader_version_range,

@@ -1,0 +1,9 @@
+{
+  "only_if_loaded": "dynamictreesplus",
+  "primitive_cap": "betterend:jellyshroom_cap_purple",
+  "map_color": "COLOR_PURPLE",
+  "mushroom_item": "betterend:small_jellyshroom",
+  "texture_overrides": {
+    "cap": "betterend:block/jellyshroom_cap"
+  }
+}

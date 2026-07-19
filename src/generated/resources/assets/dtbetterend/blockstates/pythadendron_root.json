@@ -1,10 +1,11 @@
 ﻿{
-  "variants": {
-    "": {
-      "type": "dynamictrees:surface_root",
-      "textures": {
-        "bark": "betterend:block/pythadendron_log_side"
-      }
-    }
-  }
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:surface_root",
+                              "family":  "dtbetterend:pythadendron",
+                              "textures":  {
+                                               "bark":  "betterend:block/pythadendron_log_side"
+                                           }
+                          }
+                 }
 }

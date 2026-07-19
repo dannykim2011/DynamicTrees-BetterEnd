@@ -23,10 +23,27 @@ public final class ModFeatureCancellers {
             )
     );
 
+    public static final FeatureCanceller BETTEREND_FUNGI = new FeatureTypeCanceller(
+            DynamicTreesBetterEnd.location("betterend_fungi"),
+            Set.of(
+                    Identifier.fromNamespaceAndPath("betterend", "gigantic_amaranita"),
+                    Identifier.fromNamespaceAndPath("betterend", "jellyshroom"),
+                    Identifier.fromNamespaceAndPath("betterend", "large_amaranita"),
+                    Identifier.fromNamespaceAndPath("betterend", "mossy_glowshroom")
+            )
+    );
+
+    public static final FeatureCanceller BETTEREND_CACTI = new FeatureTypeCanceller(
+            DynamicTreesBetterEnd.location("betterend_cacti"),
+            Set.of(Identifier.fromNamespaceAndPath("betterend", "neon_cactus"))
+    );
+
     private ModFeatureCancellers() {
     }
 
     public static void register(final Registry<FeatureCanceller> registry) {
         registry.register(BETTEREND_TREES);
+        registry.register(BETTEREND_FUNGI);
+        registry.register(BETTEREND_CACTI);
     }
 }

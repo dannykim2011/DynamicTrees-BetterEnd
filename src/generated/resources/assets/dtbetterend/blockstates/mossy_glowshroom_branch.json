@@ -1,0 +1,12 @@
+﻿{
+    "variants":  {
+                     "":  {
+                              "type":  "dynamictrees:branch",
+                              "family":  "dtbetterend:mossy_glowshroom",
+                              "textures":  {
+                                               "bark":  "betterend:block/mossy_glowshroom_log_side",
+                                               "rings":  "betterend:block/mossy_glowshroom_log_top"
+                                           }
+                          }
+                 }
+}
