@@ -101,7 +101,7 @@ neoForge {
 }
 
 dependencies {
-    def dynamicTreesPlusJar = file('../DynamicTreesPlus 26.1.2/build/libs/dynamictreesplus-26.1.2-1.3.2.jar')
+    def dynamicTreesPlusJar = file('../DynamicTreesPlus 26.1.2/variant-libs/dynamictreesplus-26.1.2-betterend.jar')
     implementation "com.dtteam.dynamictrees:dynamictrees-neoforge-${minecraft_version}:${dynamic_trees_version}"
     compileOnly files(dynamicTreesPlusJar)
     implementation "curse.maven:betterend-neoforge-1422294:${betterend_file_id}"
