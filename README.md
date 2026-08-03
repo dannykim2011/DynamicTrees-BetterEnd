@@ -20,9 +20,11 @@ growth, falling trees, seeds, saplings, and world generation compatibility.
 * ⚡ **Lightweight compatibility addon** – Focused solely on integrating
 BetterEnd with Dynamic Trees without changing other gameplay.
 
-## Requirements
+## Required
 
 * Dynamic Trees
-* BetterEnd Neoforge
-* Dynamic Trees Plus
+* BetterEnd NeoForge
 
+## Optional
+
+* Dynamic Trees Plus
