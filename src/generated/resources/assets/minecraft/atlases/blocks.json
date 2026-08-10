@@ -59,14 +59,6 @@
     {
       "type": "dynamictrees:thick_branch_rings",
       "resource": "betterend:block/tenanea_stripped_log_top"
-    },
-    {
-      "type": "dynamictrees:thick_branch_rings",
-      "resource": "betterend:block/umbrella_tree_log_top"
-    },
-    {
-      "type": "dynamictrees:thick_branch_rings",
-      "resource": "betterend:block/umbrella_tree_stripped_log_top"
     }
   ]
 }

@@ -20,7 +20,6 @@
                             },
     "perfect_biomes":  {
                            "names_or":  [
-                                            "betterend:dry_shrubland",
                                             "betterend:lantern_woods"
                                         ]
                        },

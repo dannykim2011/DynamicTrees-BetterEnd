@@ -19,9 +19,13 @@ public final class ModFeatureCancellers {
                     ResourceLocation.tryBuild("betterend", "lucernia"),
                     ResourceLocation.tryBuild("betterend", "pythadendron_tree"),
                     ResourceLocation.tryBuild("betterend", "tenanea"),
-                    ResourceLocation.tryBuild("betterend", "tenanea_bush"),
-                    ResourceLocation.tryBuild("betterend", "umbrella_tree")
+                    ResourceLocation.tryBuild("betterend", "tenanea_bush")
             )
+    );
+
+    public static final FeatureCanceller BETTEREND_DRAGON_HELIX_TREE = new FeatureTypeCanceller(
+            DynamicTreesBetterEnd.location("betterend_dragon_helix_tree"),
+            Set.of(ResourceLocation.tryBuild("betterend", "dragon_helix_tree"))
     );
 
     public static final FeatureCanceller BETTEREND_FUNGI = new FeatureTypeCanceller(
@@ -45,6 +49,7 @@ public final class ModFeatureCancellers {
 
     public static void register(final Registry<FeatureCanceller> registry) {
         registry.register(BETTEREND_TREES);
+        registry.register(BETTEREND_DRAGON_HELIX_TREE);
         if (ModList.get().isLoaded("dynamictreesplus")) {
             registry.register(BETTEREND_FUNGI);
             registry.register(BETTEREND_CACTI);
