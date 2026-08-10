@@ -1,6 +1,6 @@
 {
     "only_if_loaded":  "dynamictreesplus",
-    "type":  "dynamictreesplus:mushroom",
+    "type":  "dtbetterend:decorated_mushroom",
     "family":  "dtbetterend:mossy_glowshroom",
     "tapering":  0,
     "signal_energy":  25,
@@ -20,6 +20,17 @@
                        },
     "features":  [
                      "bottom_flare",
+                     {
+                         "name":  "dtbetterend:mossy_glowshroom_details",
+                         "properties":  {
+                                            "target_block":  "dtbetterend:mossy_glowshroom_cap",
+                                            "target_center_block":  "dtbetterend:mossy_glowshroom_cap_center",
+                                            "hanging_block":  "betterend:mossy_glowshroom_hymenophore",
+                                            "secondary_block":  "betterend:mossy_glowshroom_fur",
+                                            "max_count":  24,
+                                            "max_height":  32
+                                        }
+                     },
                      "mound"
                  ],
     "model_overrides":  {

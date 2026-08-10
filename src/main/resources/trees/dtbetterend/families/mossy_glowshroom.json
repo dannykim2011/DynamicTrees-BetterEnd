@@ -1,6 +1,6 @@
 {
   "only_if_loaded": "dynamictreesplus",
-  "type": "dynamictreesplus:mushroom",
+  "type": "dtbetterend:decorated_mushroom",
   "common_cap": "dtbetterend:mossy_glowshroom",
   "common_species": "dtbetterend:mossy_glowshroom",
   "primitive_log": "betterend:mossy_glowshroom_log",

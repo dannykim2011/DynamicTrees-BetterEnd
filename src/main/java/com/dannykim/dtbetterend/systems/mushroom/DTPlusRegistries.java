@@ -2,6 +2,9 @@ package com.dannykim.dtbetterend.systems.mushroom;
 
 import com.dannykim.dtbetterend.DynamicTreesBetterEnd;
 import com.dtteam.dynamictrees.event.RegistryEvent;
+import com.dtteam.dynamictrees.event.TypeRegistryEvent;
+import com.dtteam.dynamictrees.tree.family.Family;
+import com.dtteam.dynamictrees.tree.species.Species;
 import com.dtteam.dynamictreesplus.systems.mushroomlogic.shapekits.MushroomShapeKit;
 import net.neoforged.bus.api.SubscribeEvent;
 
@@ -23,5 +26,19 @@ public final class DTPlusRegistries {
     public static void registerShapes(final RegistryEvent<MushroomShapeKit> event) {
         if (!event.isEntryOfType(MushroomShapeKit.class)) return;
         event.getRegistry().registerAll(MOSSY_GLOWSHROOM, JELLYSHROOM, GIGANTIC_AMARANITA);
+    }
+
+    @SubscribeEvent
+    public static void registerFamilyTypes(final TypeRegistryEvent<Family> event) {
+        if (event.isEntryOfType(Family.class)) {
+            event.registerType(DynamicTreesBetterEnd.location("decorated_mushroom"), DecoratedMushroomFamily.TYPE);
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerSpeciesTypes(final TypeRegistryEvent<Species> event) {
+        if (event.isEntryOfType(Species.class)) {
+            event.registerType(DynamicTreesBetterEnd.location("decorated_mushroom"), DecoratedMushroomSpecies.TYPE);
+        }
     }
 }

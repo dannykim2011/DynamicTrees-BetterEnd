@@ -6,11 +6,9 @@ license="${mod_license}"
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
+logoFile="${mod_id}.png"
 authors="${mod_authors}"
 description='''${mod_description}'''
-
-[[mixins]]
-config="dtbetterend.mixins.json"
 
 [[dependencies.dtbetterend]]
 modId="neoforge"

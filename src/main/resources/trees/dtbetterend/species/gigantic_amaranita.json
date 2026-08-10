@@ -1,6 +1,6 @@
 {
     "only_if_loaded":  "dynamictreesplus",
-    "type":  "dynamictreesplus:mushroom",
+    "type":  "dtbetterend:decorated_mushroom",
     "family":  "dtbetterend:gigantic_amaranita",
     "tapering":  0,
     "signal_energy":  9,
@@ -20,6 +20,18 @@
                        },
     "features":  [
                      "bottom_flare",
+                     {
+                         "name":  "dtbetterend:gigantic_amaranita_details",
+                         "properties":  {
+                                            "target_block":  "dtbetterend:gigantic_amaranita_cap",
+                                            "target_center_block":  "dtbetterend:gigantic_amaranita_cap_center",
+                                            "underside_block":  "betterend:amaranita_hymenophore",
+                                            "hanging_block":  "betterend:amaranita_lantern",
+                                            "secondary_block":  "betterend:amaranita_fur",
+                                            "max_count":  16,
+                                            "max_height":  28
+                                        }
+                     },
                      "mound"
                  ],
     "model_overrides":  {

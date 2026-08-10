@@ -18,9 +18,13 @@ public final class ModFeatureCancellers {
                     Identifier.fromNamespaceAndPath("betterend", "lucernia"),
                     Identifier.fromNamespaceAndPath("betterend", "pythadendron_tree"),
                     Identifier.fromNamespaceAndPath("betterend", "tenanea"),
-                    Identifier.fromNamespaceAndPath("betterend", "tenanea_bush"),
-                    Identifier.fromNamespaceAndPath("betterend", "umbrella_tree")
+                    Identifier.fromNamespaceAndPath("betterend", "tenanea_bush")
             )
+    );
+
+    public static final FeatureCanceller BETTEREND_DRAGON_HELIX_TREE = new FeatureTypeCanceller(
+            DynamicTreesBetterEnd.location("betterend_dragon_helix_tree"),
+            Set.of(Identifier.fromNamespaceAndPath("betterend", "dragon_helix_tree"))
     );
 
     public static final FeatureCanceller BETTEREND_FUNGI = new FeatureTypeCanceller(
@@ -43,6 +47,7 @@ public final class ModFeatureCancellers {
 
     public static void register(final Registry<FeatureCanceller> registry) {
         registry.register(BETTEREND_TREES);
+        registry.register(BETTEREND_DRAGON_HELIX_TREE);
         registry.register(BETTEREND_FUNGI);
         registry.register(BETTEREND_CACTI);
     }
