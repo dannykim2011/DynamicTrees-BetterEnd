@@ -1,6 +1,6 @@
 {
   "only_if_loaded": "dynamictreesplus",
-  "type": "dynamictreesplus:mushroom",
+  "type": "dtbetterend:decorated_mushroom",
   "common_cap": "dtbetterend:gigantic_amaranita",
   "common_species": "dtbetterend:gigantic_amaranita",
   "primitive_log": "betterend:amaranita_stem",

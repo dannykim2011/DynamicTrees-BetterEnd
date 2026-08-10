@@ -35,23 +35,6 @@
   },
   {
     "select": {
-      "name": "betterend:dry_shrubland"
-    },
-    "apply": {
-      "species": {
-        "random": {
-          "dtbetterend:lucernia": 1
-        }
-      },
-      "density": [
-        0.5
-      ],
-      "chance": 0.75,
-      "forestness": 1.0
-    }
-  },
-  {
-    "select": {
       "name": "betterend:lantern_woods"
     },
     "apply": {
@@ -65,6 +48,23 @@
       ],
       "chance": 0.9,
       "forestness": 1.0
+    }
+  },
+  {
+    "select": {
+      "name": "betterend:waterfall_ponds"
+    },
+    "apply": {
+      "species": {
+        "random": {
+          "dtbetterend:dragon_helix_tree": 1
+        }
+      },
+      "density": [
+        0.45
+      ],
+      "chance": 0.82,
+      "forestness": 0.65
     }
   },
   {
@@ -123,33 +123,15 @@
       "name": "betterend:umbrella_jungle"
     },
     "apply": {
-      "species": {
-        "random": {
-          "dtbetterend:umbrella_tree": 1
-        }
-      },
-      "density": [
-        0.75
-      ],
-      "chance": 0.9,
-      "forestness": 1.0
-    }
-  },
-  {
-    "select": {
-      "name": "betterend:umbrella_jungle"
-    },
-    "apply": {
-      "species": {
-        "random": {
-          "dtbetterend:umbrella_tree": 7,
-          "dtbetterend:jellyshroom": 3
-        }
-      },
-      "density": [
-        0.75
-      ],
-      "chance": 0.9,
+        "species": {
+          "random": {
+            "dtbetterend:jellyshroom": 5
+          }
+        },
+        "density": [
+          4.0
+        ],
+        "chance": 1.0,
       "forestness": 1.0
     },
     "only_if_loaded": "dynamictreesplus"
