@@ -1,4 +1,5 @@
 {
+  "type": "dtbetterend:stable_cap",
   "only_if_loaded": "dynamictreesplus",
   "primitive_cap": "betterend:jellyshroom_cap_purple",
   "material_color": "COLOR_PURPLE",

@@ -4,6 +4,8 @@ import com.dannykim.dtbetterend.DynamicTreesBetterEnd;
 import com.dannykim.dtbetterend.systems.featuregen.BetterEndDecorationsGenFeature;
 import com.dannykim.dtbetterend.systems.featuregen.FlowerVinesGenFeature;
 import com.dannykim.dtbetterend.systems.featuregen.RemoveBrokenChorusGenFeature;
+import com.dannykim.dtbetterend.systems.featuregen.UmbrellaTreeCanopyGenFeature;
+import com.dannykim.dtbetterend.systems.featuregen.UmbrellaTreeClustersGenFeature;
 import com.ferreusveritas.dynamictrees.api.registry.Registry;
 import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
 
@@ -12,6 +14,10 @@ public final class ModFeatures {
             new FlowerVinesGenFeature(DynamicTreesBetterEnd.location("flower_vines"));
     public static final GenFeature REMOVE_BROKEN_CHORUS =
             new RemoveBrokenChorusGenFeature(DynamicTreesBetterEnd.location("remove_broken_chorus"));
+    public static final GenFeature UMBRELLA_TREE_CANOPY =
+            new UmbrellaTreeCanopyGenFeature(DynamicTreesBetterEnd.location("umbrella_tree_canopy"));
+    public static final GenFeature UMBRELLA_TREE_CLUSTERS =
+            new UmbrellaTreeClustersGenFeature(DynamicTreesBetterEnd.location("umbrella_tree_clusters"));
     public static final GenFeature MOSSY_GLOWSHROOM_DETAILS =
             new BetterEndDecorationsGenFeature(
                     DynamicTreesBetterEnd.location("mossy_glowshroom_details"),
@@ -30,6 +36,8 @@ public final class ModFeatures {
         registry.registerAll(
                 FLOWER_VINES,
                 REMOVE_BROKEN_CHORUS,
+                UMBRELLA_TREE_CANOPY,
+                UMBRELLA_TREE_CLUSTERS,
                 MOSSY_GLOWSHROOM_DETAILS,
                 GIGANTIC_AMARANITA_DETAILS
         );

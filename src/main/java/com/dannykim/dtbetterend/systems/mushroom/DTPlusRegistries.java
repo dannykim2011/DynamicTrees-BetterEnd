@@ -6,6 +6,7 @@ import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.ferreusveritas.dynamictreesplus.systems.mushroomlogic.shapekits.MushroomShapeKit;
+import com.ferreusveritas.dynamictreesplus.block.mushroom.CapProperties;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
@@ -35,5 +36,10 @@ public final class DTPlusRegistries {
     @SubscribeEvent
     public static void registerSpeciesTypes(final TypeRegistryEvent<Species> event) {
         event.registerType(DynamicTreesBetterEnd.location("decorated_mushroom"), DecoratedMushroomSpecies.TYPE);
+    }
+
+    @SubscribeEvent
+    public static void registerCapTypes(final TypeRegistryEvent<CapProperties> event) {
+        event.registerType(DynamicTreesBetterEnd.location("stable_cap"), StableCapProperties.TYPE);
     }
 }

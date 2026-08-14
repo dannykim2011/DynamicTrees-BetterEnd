@@ -123,13 +123,27 @@
       "name": "betterend:umbrella_jungle"
     },
     "apply": {
+      "species": "dtbetterend:umbrella_tree",
+      "density": [
+        0.5
+      ],
+      "chance": 1.0,
+      "forestness": 1.0
+    }
+  },
+  {
+    "select": {
+      "name": "betterend:umbrella_jungle"
+    },
+    "apply": {
         "species": {
           "random": {
-            "dtbetterend:jellyshroom": 5
+            "dtbetterend:umbrella_tree": 1,
+            "dtbetterend:jellyshroom": 2
           }
         },
         "density": [
-          4.0
+          1.5
         ],
         "chance": 1.0,
       "forestness": 1.0

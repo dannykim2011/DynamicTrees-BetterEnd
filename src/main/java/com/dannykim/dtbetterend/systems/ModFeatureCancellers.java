@@ -19,7 +19,8 @@ public final class ModFeatureCancellers {
                     ResourceLocation.tryBuild("betterend", "lucernia"),
                     ResourceLocation.tryBuild("betterend", "pythadendron_tree"),
                     ResourceLocation.tryBuild("betterend", "tenanea"),
-                    ResourceLocation.tryBuild("betterend", "tenanea_bush")
+                    ResourceLocation.tryBuild("betterend", "tenanea_bush"),
+                    ResourceLocation.tryBuild("betterend", "umbrella_tree")
             )
     );
 

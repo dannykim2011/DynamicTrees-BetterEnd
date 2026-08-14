@@ -15,6 +15,7 @@ public final class DynamicTreesBetterEnd {
     public DynamicTreesBetterEnd() {
         RegistryHandler.setup(MOD_ID);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> com.dannykim.dtbetterend.client.ThickBranchRingsSource::register);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> com.dannykim.dtbetterend.client.DTBetterEndClient::register);
         if (ModList.get().isLoaded("dynamictreesplus")) {
             FMLJavaModLoadingContext.get().getModEventBus().register(
                     com.dannykim.dtbetterend.systems.mushroom.DTPlusRegistries.class

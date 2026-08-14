@@ -82,5 +82,14 @@
   "item.dtbetterend.tenanea_branch": "Tenanea Branch",
   "family.dtbetterend.mossy_glowshroom": "Mossy Glowshroom",
   "family.dtbetterend.pythadendron": "Pythadendron",
-  "item.dtbetterend.lucernia_branch": "Lucernia Branch"
+  "item.dtbetterend.lucernia_branch": "Lucernia Branch",
+  "block.dtbetterend.stripped_umbrella_tree_branch": "Stripped Umbrella Tree Branch",
+  "block.dtbetterend.umbrella_tree_branch": "Umbrella Tree Branch",
+  "block.dtbetterend.umbrella_tree_leaves": "Umbrella Tree Leaves",
+  "block.dtbetterend.umbrella_tree_root": "Umbrella Tree Root",
+  "block.dtbetterend.umbrella_tree_sapling": "Umbrella Tree Sapling",
+  "item.dtbetterend.umbrella_tree_seed": "Umbrella Tree Seed",
+  "item.dtbetterend.umbrella_tree_branch": "Umbrella Tree Branch",
+  "species.dtbetterend.umbrella_tree": "Umbrella Tree",
+  "family.dtbetterend.umbrella_tree": "Umbrella Tree"
 }
