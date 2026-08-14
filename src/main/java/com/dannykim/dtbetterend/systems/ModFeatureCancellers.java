@@ -19,7 +19,8 @@ public final class ModFeatureCancellers {
                     ResourceLocation.fromNamespaceAndPath("betterend", "lucernia"),
                     ResourceLocation.fromNamespaceAndPath("betterend", "pythadendron_tree"),
                     ResourceLocation.fromNamespaceAndPath("betterend", "tenanea"),
-                    ResourceLocation.fromNamespaceAndPath("betterend", "tenanea_bush")
+                    ResourceLocation.fromNamespaceAndPath("betterend", "tenanea_bush"),
+                    ResourceLocation.fromNamespaceAndPath("betterend", "umbrella_tree")
             )
     );
 

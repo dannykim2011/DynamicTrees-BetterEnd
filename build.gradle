@@ -87,6 +87,7 @@ neoForge {
         server {
             server()
             gameDirectory = file('run-server')
+            jvmArguments.addAll '-Xms4G', '-Xmx12G'
         }
 
         data {

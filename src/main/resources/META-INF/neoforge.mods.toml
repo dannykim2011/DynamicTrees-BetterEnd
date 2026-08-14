@@ -2,6 +2,9 @@ modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
 
+[[mixins]]
+config="dtbetterend.mixins.json"
+
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
@@ -43,5 +46,15 @@ modId="betterend"
 type="required"
 versionRange="[${betterend_version},)"
 ordering="AFTER"
+side="BOTH"
+
+# BetterEnd and BetterNether share WorldWeaver registries that are unsafe to
+# initialize concurrently on 1.21.1. Keep BetterNether optional, but serialize
+# their construction whenever both mods are installed.
+[[dependencies.dtbetterend]]
+modId="betternether"
+type="optional"
+versionRange="[0,)"
+ordering="BEFORE"
 side="BOTH"
 

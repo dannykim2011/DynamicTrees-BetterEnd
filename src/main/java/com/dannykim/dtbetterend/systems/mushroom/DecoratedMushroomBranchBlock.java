@@ -2,12 +2,17 @@ package com.dannykim.dtbetterend.systems.mushroom;
 
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictreesplus.block.mushroom.MushroomBranchBlock;
+import com.dtteam.dynamictreesplus.block.mushroom.DynamicCapCenterBlock;
+import com.dtteam.dynamictreesplus.systems.mushroomlogic.context.MushroomCapContext;
+import com.dtteam.dynamictreesplus.tree.HugeMushroomSpecies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,13 +38,93 @@ public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
                                    final @NotNull List<BlockPos> endPoints,
                                    final @NotNull Map<BlockPos, BlockState> destroyedCapBlocks,
                                    final @NotNull List<BranchBlock.ItemStackPos> drops) {
-        super.destroyMushroomCap(level, cutPos, species, tool, endPoints, destroyedCapBlocks, drops);
-        this.collectAttachedDecorations(level, cutPos, destroyedCapBlocks);
+        final Map<BlockPos, BlockState> protectedCaps = this.hideStandingCapOverlaps(level, species, endPoints);
+        try {
+            super.destroyMushroomCap(level, cutPos, species, tool, endPoints, destroyedCapBlocks, drops);
+        } finally {
+            protectedCaps.forEach((pos, state) -> level.setBlock(pos, state, Block.UPDATE_CLIENTS));
+        }
+        this.dropAttachedDecorations(level, cutPos, destroyedCapBlocks, tool);
     }
 
-    private void collectAttachedDecorations(final Level level,
-                                            final BlockPos cutPos,
-                                            final Map<BlockPos, BlockState> destroyedCapBlocks) {
+    private Map<BlockPos, BlockState> hideStandingCapOverlaps(
+            final Level level,
+            final com.dtteam.dynamictrees.tree.species.Species species,
+            final List<BlockPos> endPoints) {
+        final Map<BlockPos, BlockState> protectedCaps = new HashMap<>();
+        if (level.isClientSide() || !(species instanceof HugeMushroomSpecies mushroomSpecies)) {
+            return protectedCaps;
+        }
+
+        final Set<BlockPos> felledCenters = new HashSet<>();
+        final Set<BlockPos> felledShape = new HashSet<>();
+        for (final BlockPos endPoint : endPoints) {
+            final BlockPos center = endPoint.above().immutable();
+            final int age = DynamicCapCenterBlock.getCapAge(level, center);
+            if (age >= 0) {
+                felledCenters.add(center);
+                felledShape.addAll(mushroomSpecies.getMushroomShapeKit().getShapeCluster(
+                        new MushroomCapContext(level, center, mushroomSpecies, age)));
+            }
+        }
+        if (felledShape.isEmpty()) {
+            return protectedCaps;
+        }
+
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int minZ = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE;
+        int maxY = Integer.MIN_VALUE;
+        int maxZ = Integer.MIN_VALUE;
+        for (final BlockPos pos : felledShape) {
+            minX = Math.min(minX, pos.getX());
+            minY = Math.min(minY, pos.getY());
+            minZ = Math.min(minZ, pos.getZ());
+            maxX = Math.max(maxX, pos.getX());
+            maxY = Math.max(maxY, pos.getY());
+            maxZ = Math.max(maxZ, pos.getZ());
+        }
+
+        final Block capCenter = mushroomSpecies.getCapProperties().getDynamicCapCenterBlock().orElse(null);
+        if (capCenter == null) {
+            return protectedCaps;
+        }
+        final Set<BlockPos> standingShape = new HashSet<>();
+        for (int x = minX - 8; x <= maxX + 8; x++) {
+            for (int y = minY - 8; y <= maxY + 8; y++) {
+                for (int z = minZ - 8; z <= maxZ + 8; z++) {
+                    final BlockPos center = new BlockPos(x, y, z);
+                    if (felledCenters.contains(center)
+                            || level.getBlockState(center).getBlock() != capCenter
+                            || !(level.getBlockState(center.below()).getBlock() instanceof BranchBlock)) {
+                        continue;
+                    }
+                    final int age = DynamicCapCenterBlock.getCapAge(level, center);
+                    if (age >= 0) {
+                        standingShape.addAll(mushroomSpecies.getMushroomShapeKit().getShapeCluster(
+                                new MushroomCapContext(level, center, mushroomSpecies, age)));
+                    }
+                }
+            }
+        }
+
+        standingShape.retainAll(felledShape);
+        standingShape.removeAll(felledCenters);
+        for (final BlockPos pos : standingShape) {
+            final BlockState state = level.getBlockState(pos);
+            if (!state.isAir()) {
+                protectedCaps.put(pos.immutable(), state);
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+            }
+        }
+        return protectedCaps;
+    }
+
+    private void dropAttachedDecorations(final Level level,
+                                         final BlockPos cutPos,
+                                         final Map<BlockPos, BlockState> destroyedCapBlocks,
+                                         final ItemStack tool) {
         final ArrayDeque<BlockPos> queue = new ArrayDeque<>();
         final Set<BlockPos> visited = new HashSet<>();
         for (final BlockPos relPos : new ArrayList<>(destroyedCapBlocks.keySet())) {
@@ -61,12 +147,27 @@ public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
             }
 
             final BlockPos immutable = pos.immutable();
-            destroyedCapBlocks.put(immutable.subtract(cutPos), state);
+            dropDecorationResources(level, immutable, state, tool);
             level.setBlock(immutable, Blocks.AIR.defaultBlockState(), 3);
             collected++;
 
             for (final Direction direction : Direction.values()) {
                 queue.add(immutable.relative(direction));
+            }
+        }
+    }
+
+    private static void dropDecorationResources(final Level level,
+                                                final BlockPos pos,
+                                                final BlockState state,
+                                                final ItemStack tool) {
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return;
+        }
+        for (final ItemStack stack : Block.getDrops(state, serverLevel, pos, null, null, tool)) {
+            final ResourceLocation key = BuiltInRegistries.ITEM.getKey(stack.getItem());
+            if (!"betterend".equals(key.getNamespace()) || !"mossy_glowshroom_sapling".equals(key.getPath())) {
+                Block.popResource(level, pos, stack);
             }
         }
     }

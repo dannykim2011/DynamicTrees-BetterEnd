@@ -3,5 +3,6 @@
     "primitive_leaves":"betterend:tenanea_leaves",
     "outer_block":"betterend:tenanea_outer_leaves",
     "cell_kit": "dynamictrees:dark_oak",
+    "smother": 3,
     "light_requirement": 0
 }

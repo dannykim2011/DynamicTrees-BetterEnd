@@ -2,6 +2,8 @@ package com.dannykim.dtbetterend.systems;
 
 import com.dannykim.dtbetterend.DynamicTreesBetterEnd;
 import com.dannykim.dtbetterend.systems.leaves.FurOuterLeaveProperties;
+import com.dannykim.dtbetterend.systems.umbrella.UmbrellaTreeFamily;
+import com.dannykim.dtbetterend.systems.umbrella.UmbrellaTreeSpecies;
 import com.dtteam.dynamictrees.event.ApplierRegistryEvent;
 import com.dtteam.dynamictrees.event.RegistryEvent;
 import com.dtteam.dynamictrees.event.TypeRegistryEvent;
@@ -53,6 +55,18 @@ public final class DTBetterEndRegistries {
     public static void registerLeavesPropertiesTypes(final TypeRegistryEvent<LeavesProperties> event) {
         if (!event.isEntryOfType(LeavesProperties.class)) return;
         event.registerType(DynamicTreesBetterEnd.location("fur"), FurOuterLeaveProperties.TYPE);
+    }
+
+    @SubscribeEvent
+    public static void registerFamilyTypes(final TypeRegistryEvent<Family> event) {
+        if (!event.isEntryOfType(Family.class)) return;
+        event.registerType(DynamicTreesBetterEnd.location("umbrella_tree"), UmbrellaTreeFamily.TYPE);
+    }
+
+    @SubscribeEvent
+    public static void registerSpeciesTypes(final TypeRegistryEvent<Species> event) {
+        if (!event.isEntryOfType(Species.class)) return;
+        event.registerType(DynamicTreesBetterEnd.location("umbrella_tree"), UmbrellaTreeSpecies.TYPE);
     }
 
     @SubscribeEvent
