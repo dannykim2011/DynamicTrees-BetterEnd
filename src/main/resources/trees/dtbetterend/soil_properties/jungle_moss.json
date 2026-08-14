@@ -1,0 +1,8 @@
+{
+  "primitive_soil": "betterend:jungle_moss",
+  "acceptable_soils": [
+    "jungle_moss"
+  ],
+  "substitute_soil": "end_stone"
+}
+

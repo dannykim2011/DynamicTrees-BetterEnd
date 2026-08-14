@@ -82,5 +82,14 @@
     "item.dtbetterend.tenanea_branch":  "테나네아 가지",
     "family.dtbetterend.mossy_glowshroom":  "이끼 빛버섯",
     "family.dtbetterend.pythadendron":  "피타덴드론",
-    "item.dtbetterend.lucernia_branch":  "루세르니아 가지"
+    "item.dtbetterend.lucernia_branch":  "루세르니아 가지",
+    "block.dtbetterend.stripped_umbrella_tree_branch": "껍질 벗긴 우산나무 가지",
+    "block.dtbetterend.umbrella_tree_branch": "우산나무 가지",
+    "block.dtbetterend.umbrella_tree_leaves": "우산나무 잎",
+    "block.dtbetterend.umbrella_tree_root": "우산나무 뿌리",
+    "block.dtbetterend.umbrella_tree_sapling": "우산나무 묘목",
+    "item.dtbetterend.umbrella_tree_seed": "우산나무 씨앗",
+    "item.dtbetterend.umbrella_tree_branch": "우산나무 가지",
+    "species.dtbetterend.umbrella_tree": "우산나무",
+    "family.dtbetterend.umbrella_tree": "우산나무"
 }

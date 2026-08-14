@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "betterend:block/tint_cube",
+  "render_type": "translucent",
   "textures": {
-    "all": "betterend:block/jellyshroom_cap"
+    "texture": "betterend:block/jellyshroom_cap"
   }
 }

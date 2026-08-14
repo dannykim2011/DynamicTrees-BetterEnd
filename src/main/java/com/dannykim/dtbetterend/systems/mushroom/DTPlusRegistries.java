@@ -6,6 +6,7 @@ import com.dtteam.dynamictrees.event.TypeRegistryEvent;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.dtteam.dynamictrees.tree.species.Species;
 import com.dtteam.dynamictreesplus.systems.mushroomlogic.shapekits.MushroomShapeKit;
+import com.dtteam.dynamictreesplus.block.mushroom.CapProperties;
 import net.neoforged.bus.api.SubscribeEvent;
 
 /**
@@ -39,6 +40,13 @@ public final class DTPlusRegistries {
     public static void registerSpeciesTypes(final TypeRegistryEvent<Species> event) {
         if (event.isEntryOfType(Species.class)) {
             event.registerType(DynamicTreesBetterEnd.location("decorated_mushroom"), DecoratedMushroomSpecies.TYPE);
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerCapTypes(final TypeRegistryEvent<CapProperties> event) {
+        if (event.isEntryOfType(CapProperties.class)) {
+            event.registerType(DynamicTreesBetterEnd.location("stable_cap"), StableCapProperties.TYPE);
         }
     }
 }

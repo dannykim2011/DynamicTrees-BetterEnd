@@ -1,0 +1,61 @@
+{
+  "type": "dtbetterend:umbrella_tree",
+  "family": "dtbetterend:umbrella_tree",
+  "tapering": 0.3,
+  "signal_energy": 400.0,
+  "up_probability": 4,
+  "lowest_branch_height": 8,
+  "growth_rate": 0.85,
+  "soil_longevity": 30,
+  "max_branch_radius": 24,
+  "world_gen_leaf_map_height": 96,
+  "growth_logic_kit": {
+    "name": "dtbetterend:umbrella_tree",
+    "properties": {
+      "max_height": 50
+    }
+  },
+  "leaves_properties": "dtbetterend:umbrella_tree",
+  "perfect_biomes": {
+    "name": "betterend:umbrella_jungle"
+  },
+  "acceptable_soils": [
+    "jungle_moss"
+  ],
+  "world_gen_acceptable_soils": [
+    "jungle_moss"
+  ],
+  "primitive_sapling": "betterend:umbrella_tree_sapling",
+  "always_show_on_waila": false,
+  "generate_seed": true,
+  "generate_sapling": true,
+  "features": [
+    {
+      "name": "roots",
+      "properties": {
+        "min_trunk_radius": 8
+      }
+    },
+    "mound",
+    "clear_volume",
+    {
+      "name": "dtbetterend:umbrella_tree_canopy",
+      "properties": {
+        "target_block": "dtbetterend:umbrella_tree_leaves",
+        "membrane_block": "betterend:umbrella_tree_membrane",
+        "min_radius": 6,
+        "max_radius": 10
+      }
+    },
+    {
+      "name": "dtbetterend:umbrella_tree_clusters",
+      "properties": {
+        "target_block": "betterend:umbrella_tree_membrane",
+        "cluster_block": "betterend:umbrella_tree_cluster",
+        "place_chance": 1.0,
+        "max_count": 72,
+        "max_height": 50
+      }
+    }
+  ]
+}

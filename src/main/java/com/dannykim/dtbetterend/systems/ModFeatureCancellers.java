@@ -18,7 +18,8 @@ public final class ModFeatureCancellers {
                     Identifier.fromNamespaceAndPath("betterend", "lucernia"),
                     Identifier.fromNamespaceAndPath("betterend", "pythadendron_tree"),
                     Identifier.fromNamespaceAndPath("betterend", "tenanea"),
-                    Identifier.fromNamespaceAndPath("betterend", "tenanea_bush")
+                    Identifier.fromNamespaceAndPath("betterend", "tenanea_bush"),
+                    Identifier.fromNamespaceAndPath("betterend", "umbrella_tree")
             )
     );
 

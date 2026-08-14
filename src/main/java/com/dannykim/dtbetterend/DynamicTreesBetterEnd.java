@@ -1,6 +1,7 @@
 package com.dannykim.dtbetterend;
 
 import com.dannykim.dtbetterend.systems.DTBetterEndRegistries;
+import com.dannykim.dtbetterend.systems.mushroom.MossyGlowshroomDropHandler;
 import com.dtteam.dynamictrees.registry.NeoForgeRegistryHandler;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
@@ -9,6 +10,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.common.NeoForge;
 
 @Mod(DynamicTreesBetterEnd.MOD_ID)
 public final class DynamicTreesBetterEnd {
@@ -18,6 +20,7 @@ public final class DynamicTreesBetterEnd {
         modEventBus.register(DTBetterEndRegistries.class);
         if (ModList.get().isLoaded("dynamictreesplus")) {
             modEventBus.register(com.dannykim.dtbetterend.systems.mushroom.DTPlusRegistries.class);
+            NeoForge.EVENT_BUS.register(MossyGlowshroomDropHandler.class);
         }
         if (FMLEnvironment.getDist() == Dist.CLIENT) {
             com.dannykim.dtbetterend.client.DTBetterEndClient.register(modEventBus);
