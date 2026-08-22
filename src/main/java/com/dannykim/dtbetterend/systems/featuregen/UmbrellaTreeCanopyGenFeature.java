@@ -78,7 +78,8 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
 
     @Override
     protected boolean postGrow(final GenFeatureConfiguration configuration, final PostGrowContext context) {
-        if (context.fertility() > 7 || configuration.get(MEMBRANE_BLOCK) == Blocks.AIR) return false;
+        if (context.fertility() <= 0 || context.fertility() > 7
+                || configuration.get(MEMBRANE_BLOCK) == Blocks.AIR) return false;
         if (growthForm(context.pos()) == 2) {
             context.species().getFamily().getBranch().ifPresent(branch -> completeDoubleBranches(
                     context.level(), context.pos(), configuration.get(TARGET_BLOCK), branch,

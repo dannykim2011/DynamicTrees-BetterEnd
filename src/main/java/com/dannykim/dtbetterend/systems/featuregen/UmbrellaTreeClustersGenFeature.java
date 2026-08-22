@@ -11,6 +11,7 @@ import com.dtteam.dynamictrees.systems.genfeature.context.PostRotContext;
 import com.dtteam.dynamictrees.systems.nodemapper.FindEndsNode;
 import com.dtteam.dynamictrees.tree.TreeHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -28,6 +29,8 @@ public final class UmbrellaTreeClustersGenFeature extends GenFeature {
             ConfigurationProperty.block("target_block");
     public static final ConfigurationProperty<Block> CLUSTER_BLOCK =
             ConfigurationProperty.block("cluster_block");
+    public static final ConfigurationProperty<Block> SIDE_LEAVES_BLOCK =
+            ConfigurationProperty.block("side_leaves_block");
 
     public UmbrellaTreeClustersGenFeature(final ResourceLocation registryName) {
         super(registryName);
@@ -35,7 +38,7 @@ public final class UmbrellaTreeClustersGenFeature extends GenFeature {
 
     @Override
     protected void registerProperties() {
-        this.register(TARGET_BLOCK, CLUSTER_BLOCK, PLACE_CHANCE, MAX_COUNT, MAX_HEIGHT);
+        this.register(TARGET_BLOCK, CLUSTER_BLOCK, SIDE_LEAVES_BLOCK, PLACE_CHANCE, MAX_COUNT, MAX_HEIGHT);
     }
 
     @Override
@@ -43,6 +46,7 @@ public final class UmbrellaTreeClustersGenFeature extends GenFeature {
         return super.createDefaultConfiguration()
                 .with(TARGET_BLOCK, Blocks.AIR)
                 .with(CLUSTER_BLOCK, Blocks.AIR)
+                .with(SIDE_LEAVES_BLOCK, Blocks.AIR)
                 .with(PLACE_CHANCE, 1.0F)
                 .with(MAX_COUNT, 72)
                 .with(MAX_HEIGHT, 100);
@@ -69,7 +73,7 @@ public final class UmbrellaTreeClustersGenFeature extends GenFeature {
 
             final int canopyRadius = measureCanopyRadius(
                     context.level(), junction, configuration.get(TARGET_BLOCK));
-            final int layers = canopyRadius >= 17 ? 3 : canopyRadius >= 11 ? 2 : 1;
+            final int layers = canopyRadius >= 8 ? 2 : 1;
             placed += placeWrappedClusters(configuration, context, junction, layers,
                     configuration.get(MAX_COUNT) - placed);
             if (placed >= configuration.get(MAX_COUNT)) break;
@@ -109,19 +113,19 @@ public final class UmbrellaTreeClustersGenFeature extends GenFeature {
                                             final int remaining) {
         if (remaining <= 0) return 0;
         if (!canAccess(context.level(), junction)) return 0;
+        int placed = replaceSideLeaves(configuration, context, junction, remaining);
+        placed += placeCandidates(configuration, context, List.of(junction.above()), remaining - placed, false);
+        final int wrappingLimit = remaining - placed;
+        if (wrappingLimit <= 0) return placed;
         final BlockState branchState = context.level().getBlockState(junction);
         final int branchRadius = branchState.getBlock() instanceof BranchBlock branch
                 ? branch.getRadius(branchState) : 8;
         final int ringRadius = Math.max(1, Math.min(3, (branchRadius + 7) / 8));
         final List<BlockPos> candidates = new ArrayList<>();
-        candidates.add(junction.offset(1, 0, 0));
-        candidates.add(junction.offset(-1, 0, 0));
-        candidates.add(junction.offset(0, 0, 1));
-        candidates.add(junction.offset(0, 0, -1));
 
         for (int layer = 0; layer < layers; layer++) {
             final int radius = Math.min(4, ringRadius + layer);
-            final int y = junction.getY() - layer;
+            final int y = junction.getY() + 1 + layer;
             final int offset = context.random().nextInt(Math.max(1, radius * 2));
             for (int x = -radius; x <= radius; x++) {
                 for (int z = -radius; z <= radius; z++) {
@@ -133,17 +137,34 @@ public final class UmbrellaTreeClustersGenFeature extends GenFeature {
             }
         }
 
-        int placed = placeCandidates(configuration, context, candidates, remaining, false);
-        if (placed < Math.min(4, remaining)) {
+        final int wrapped = placeCandidates(configuration, context, candidates, wrappingLimit, false);
+        placed += wrapped;
+        if (wrapped < Math.min(4, wrappingLimit)) {
             candidates.clear();
-            for (int radius = ringRadius; radius <= Math.min(4, ringRadius + 1); radius++) {
-                for (int x = -radius; x <= radius; x++) for (int z = -radius; z <= radius; z++) {
-                    if (Math.max(Math.abs(x), Math.abs(z)) == radius) {
-                        candidates.add(junction.offset(x, 0, z));
-                    }
+            for (int x = -1; x <= 1; x++) for (int z = -1; z <= 1; z++) {
+                if (Math.max(Math.abs(x), Math.abs(z)) == 1) {
+                    candidates.add(junction.offset(x, 0, z));
                 }
             }
             placed += placeCandidates(configuration, context, candidates, remaining - placed, true);
+        }
+        return placed;
+    }
+
+    private static int replaceSideLeaves(final GenFeatureConfiguration configuration,
+                                         final PostGenerationContext context,
+                                         final BlockPos junction, final int limit) {
+        if (limit <= 0 || configuration.get(SIDE_LEAVES_BLOCK) == Blocks.AIR) return 0;
+        int placed = 0;
+        for (final Direction direction : Direction.Plane.HORIZONTAL) {
+            final BlockPos pos = junction.relative(direction);
+            if (!canAccess(context.level(), pos)) continue;
+            final BlockState state = context.level().getBlockState(pos);
+            if (state.getBlock() instanceof BranchBlock
+                    || state.getBlock() instanceof TrunkShellBlock) continue;
+            context.level().setBlock(pos,
+                    withNatural(configuration.get(CLUSTER_BLOCK).defaultBlockState()), Block.UPDATE_ALL);
+            if (++placed >= limit) break;
         }
         return placed;
     }

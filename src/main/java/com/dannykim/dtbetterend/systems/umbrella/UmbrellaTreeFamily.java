@@ -76,17 +76,18 @@ final class UmbrellaTreeBranchBlock extends BasicBranchBlock {
                               final Map<BlockPos, BlockState> destroyedLeaves,
                               final List<BranchBlock.ItemStackPos> drops) {
         super.destroyLeaves(level, cutPos, species, tool, endPoints, destroyedLeaves, drops);
-        collectAttachedBlocks(level, cutPos, endPoints, destroyedLeaves);
+        collectAttachedBlocks(level, cutPos, species, tool, endPoints, destroyedLeaves, drops);
     }
 
     static void collectAttachedBlocks(final Level level, final BlockPos cutPos,
+                                      final Species species, final ItemStack tool,
                                       final List<BlockPos> endPoints,
-                                      final Map<BlockPos, BlockState> destroyedLeaves) {
+                                      final Map<BlockPos, BlockState> destroyedLeaves,
+                                      final List<BranchBlock.ItemStackPos> drops) {
         final Set<BlockPos> collected = new HashSet<>();
         final ArrayDeque<BlockPos> open = new ArrayDeque<>();
-        for (final BlockPos endPoint : endPoints) for (final Direction direction : Direction.values()) {
-            final BlockPos seed = endPoint.relative(direction).immutable();
-            if (isCanopyBlock(level.getBlockState(seed))) open.add(seed);
+        for (final BlockPos endPoint : endPoints) {
+            addAttachedCanopySeeds(level, endPoint, open);
         }
         while (!open.isEmpty() && collected.size() < 8192) {
             final BlockPos pos = open.removeFirst();
@@ -107,6 +108,15 @@ final class UmbrellaTreeBranchBlock extends BasicBranchBlock {
             final BlockState state = level.getBlockState(pos);
             if (!isCanopyBlock(state)) continue;
             destroyedLeaves.put(pos.subtract(cutPos), state);
+            if (isMembrane(state)) {
+                for (final ItemStack drop : species.getLeavesProperties().getDrops(level, pos, tool, species)) {
+                    drops.add(new BranchBlock.ItemStackPos(drop, pos.subtract(cutPos)));
+                }
+            }
+            if (isCluster(state)) {
+                final ItemStack cluster = new ItemStack(state.getBlock());
+                if (!cluster.isEmpty()) drops.add(new BranchBlock.ItemStackPos(cluster, pos.subtract(cutPos)));
+            }
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
         }
         for (final Map.Entry<BlockPos, BlockState> entry : destroyedLeaves.entrySet()) {
@@ -115,6 +125,14 @@ final class UmbrellaTreeBranchBlock extends BasicBranchBlock {
             if (isCanopyBlock(level.getBlockState(worldPos))) {
                 level.setBlock(worldPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
             }
+        }
+    }
+
+    private static void addAttachedCanopySeeds(final Level level, final BlockPos endPoint,
+                                               final ArrayDeque<BlockPos> open) {
+        for (int distance = 1; distance <= 5; distance++) {
+            final BlockPos seed = endPoint.above(distance).immutable();
+            if (isCanopyBlock(level.getBlockState(seed))) open.addLast(seed);
         }
     }
 
@@ -165,6 +183,7 @@ final class UmbrellaTreeThickBranchBlock extends ThickBranchBlock {
                               final Map<BlockPos, BlockState> destroyedLeaves,
                               final List<BranchBlock.ItemStackPos> drops) {
         super.destroyLeaves(level, cutPos, species, tool, endPoints, destroyedLeaves, drops);
-        UmbrellaTreeBranchBlock.collectAttachedBlocks(level, cutPos, endPoints, destroyedLeaves);
+        UmbrellaTreeBranchBlock.collectAttachedBlocks(
+                level, cutPos, species, tool, endPoints, destroyedLeaves, drops);
     }
 }

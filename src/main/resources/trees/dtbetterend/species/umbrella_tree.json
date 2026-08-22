@@ -52,6 +52,7 @@
       "properties": {
         "target_block": "betterend:umbrella_tree_membrane",
         "cluster_block": "betterend:umbrella_tree_cluster",
+        "side_leaves_block": "dtbetterend:umbrella_tree_leaves",
         "place_chance": 1.0,
         "max_count": 72,
         "max_height": 50
