@@ -14,7 +14,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "betterend:umbrella_tree_stripped_log"
+          "name": "betterend:neon_cactus"
         }
       ],
       "rolls": 1
@@ -23,7 +23,7 @@
       "bonus_rolls": 0,
       "entries": [
         {
-          "type": "minecraft:item",
+          "type": "dynamictrees:seed_item",
           "functions": [
             {
               "function": "dynamictrees:multiply_sticks_count"
@@ -31,12 +31,11 @@
             {
               "function": "minecraft:explosion_decay"
             }
-          ],
-          "name": "minecraft:stick"
+          ]
         }
       ],
       "rolls": 1
     }
   ],
-  "random_sequence": "dtbetterend:trees/branches/stripped_umbrella_tree"
+  "random_sequence": "dtbetterend:trees/branches/neon_cactus"
 }
