@@ -9,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -44,7 +43,7 @@ public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
         } finally {
             protectedCaps.forEach((pos, state) -> level.setBlock(pos, state, Block.UPDATE_CLIENTS));
         }
-        this.dropAttachedDecorations(level, cutPos, destroyedCapBlocks, tool);
+        this.removeAttachedDecorations(level, cutPos, destroyedCapBlocks, drops);
     }
 
     private Map<BlockPos, BlockState> hideStandingCapOverlaps(
@@ -94,10 +93,10 @@ public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
         return protectedCaps;
     }
 
-    private void dropAttachedDecorations(final Level level,
-                                         final BlockPos cutPos,
-                                         final Map<BlockPos, BlockState> destroyedCapBlocks,
-                                         final ItemStack tool) {
+    private void removeAttachedDecorations(final Level level,
+                                           final BlockPos cutPos,
+                                           final Map<BlockPos, BlockState> destroyedCapBlocks,
+                                           final List<BranchBlock.ItemStackPos> drops) {
         final ArrayDeque<BlockPos> queue = new ArrayDeque<>();
         final Set<BlockPos> visited = new HashSet<>();
         for (final BlockPos relPos : new ArrayList<>(destroyedCapBlocks.keySet())) {
@@ -120,7 +119,11 @@ public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
             }
 
             final BlockPos immutable = pos.immutable();
-            dropDecorationResources(level, immutable, state, tool);
+            final ItemStack decoration = new ItemStack(state.getBlock());
+            if (!decoration.isEmpty() && !"mossy_glowshroom_fur".equals(
+                    BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath())) {
+                Block.popResource(level, immutable, decoration);
+            }
             level.setBlock(immutable, Blocks.AIR.defaultBlockState(), 3);
             collected++;
 
@@ -130,18 +133,4 @@ public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
         }
     }
 
-    private static void dropDecorationResources(final Level level,
-                                                final BlockPos pos,
-                                                final BlockState state,
-                                                final ItemStack tool) {
-        if (!(level instanceof ServerLevel serverLevel)) {
-            return;
-        }
-        for (final ItemStack stack : Block.getDrops(state, serverLevel, pos, null, null, tool)) {
-            final Identifier key = BuiltInRegistries.ITEM.getKey(stack.getItem());
-            if (!"betterend".equals(key.getNamespace()) || !"mossy_glowshroom_sapling".equals(key.getPath())) {
-                Block.popResource(level, pos, stack);
-            }
-        }
-    }
 }

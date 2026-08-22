@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
+      "bonus_rolls": 0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -14,13 +14,13 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "betterend:dragon_tree_stripped_log"
+          "name": "betterend:umbrella_tree_log"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
-      "bonus_rolls": 0.0,
+      "bonus_rolls": 0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -35,8 +35,8 @@
           "name": "minecraft:stick"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
-  "random_sequence": "dtbetterend:trees/branches/stripped_dragon_tree"
+  "random_sequence": "dtbetterend:trees/branches/umbrella_tree_branch"
 }

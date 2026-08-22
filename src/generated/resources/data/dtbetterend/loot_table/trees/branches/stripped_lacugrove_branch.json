@@ -14,7 +14,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "betterend:lucernia_log"
+          "name": "betterend:lacugrove_stripped_log"
         }
       ],
       "rolls": 1.0
@@ -38,5 +38,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "dtbetterend:trees/branches/lucernia"
+  "random_sequence": "dtbetterend:trees/branches/stripped_lacugrove_branch"
 }

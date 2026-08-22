@@ -14,11 +14,11 @@
                                                                 "function":  "minecraft:explosion_decay"
                                                             }
                                                         ],
-                                          "name":  "betterend:jellyshroom_log"
+                                          "name":  "betterend:amaranita_stem"
                                       }
                                   ],
                       "rolls":  1.0
                   }
               ],
-    "random_sequence":  "dtbetterend:trees/branches/jellyshroom"
+    "random_sequence":  "dtbetterend:trees/branches/gigantic_amaranita_branch"
 }
