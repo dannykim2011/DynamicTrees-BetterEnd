@@ -20,7 +20,7 @@ side="BOTH"
 [[dependencies.${mod_id}]]
 modId="dynamictreesplus"
 mandatory=false
-versionRange="[1.2.2,)"
+versionRange="[${dynamic_trees_plus_version},)"
 ordering="AFTER"
 side="BOTH"
 
