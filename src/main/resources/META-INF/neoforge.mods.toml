@@ -13,35 +13,35 @@ logoFile="${mod_id}.png"
 authors="${mod_authors}"
 description='''${mod_description}'''
 
-[[dependencies.dtbetterend]]
+[[dependencies.${mod_id}]]
 modId="neoforge"
 type="required"
 versionRange="[21.1,)"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.dtbetterend]]
+[[dependencies.${mod_id}]]
 modId="dynamictreesplus"
 type="optional"
 versionRange="[${dynamic_trees_plus_version},)"
 ordering="AFTER"
 side="BOTH"
 
-[[dependencies.dtbetterend]]
+[[dependencies.${mod_id}]]
 modId="minecraft"
 type="required"
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.dtbetterend]]
+[[dependencies.${mod_id}]]
 modId="dynamictrees"
 type="required"
 versionRange="[${dynamic_trees_version},)"
 ordering="AFTER"
 side="BOTH"
 
-[[dependencies.dtbetterend]]
+[[dependencies.${mod_id}]]
 modId="betterend"
 type="required"
 versionRange="[${betterend_version},)"
@@ -51,7 +51,7 @@ side="BOTH"
 # BetterEnd and BetterNether share WorldWeaver registries that are unsafe to
 # initialize concurrently on 1.21.1. Keep BetterNether optional, but serialize
 # their construction whenever both mods are installed.
-[[dependencies.dtbetterend]]
+[[dependencies.${mod_id}]]
 modId="betternether"
 type="optional"
 versionRange="[0,)"

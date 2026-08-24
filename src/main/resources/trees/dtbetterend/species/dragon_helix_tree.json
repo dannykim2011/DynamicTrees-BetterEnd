@@ -21,6 +21,7 @@
   "generate_sapling": false,
   "always_show_on_waila": false,
   "features": [
+      "dtbetterend:base_trunk_clearance",
     {
       "name": "roots",
       "properties": {
