@@ -131,6 +131,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_description            : mod_description,
             minecraft_version_range    : minecraft_version_range,
             dynamic_trees_version      : dynamic_trees_version,
+            dynamic_trees_plus_version : dynamic_trees_plus_version,
             betterend_version          : betterend_version
     ]
     inputs.properties replaceProperties

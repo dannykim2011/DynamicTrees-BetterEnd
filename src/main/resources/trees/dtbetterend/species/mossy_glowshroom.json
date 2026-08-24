@@ -21,6 +21,7 @@
                            "name":  "betterend:foggy_mushroomland"
                        },
     "features":  [
+        "dtbetterend:base_trunk_clearance",
                      "bottom_flare",
                      {
                          "name":  "dtbetterend:mossy_glowshroom_details",
