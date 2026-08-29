@@ -12,6 +12,8 @@ import com.ferreusveritas.dynamictrees.entity.animation.AnimationHandler;
 import com.ferreusveritas.dynamictrees.util.BranchDestructionData;
 import com.ferreusveritas.dynamictrees.worldgen.GenerationContext;
 import com.dannykim.dtbetterend.systems.featuregen.UmbrellaTreeCanopyGenFeature;
+import com.dannykim.dtbetterend.systems.featuregen.UmbrellaTreeGrowthCanopy;
+import com.dannykim.dtbetterend.systems.leaves.UmbrellaLeavesProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 
 import java.util.HashMap;
 
@@ -31,10 +34,22 @@ public final class UmbrellaTreeSpecies extends Species {
     private static final int MEMBRANE_COLOR_COUNT = 8;
     private static final int CLUSTER_INDEX = -9;
     private static final int NATURAL_CLUSTER_INDEX = -10;
+    private static final int DYNAMIC_MEMBRANE_INDEX_BASE = -11;
+    private static final int DYNAMIC_CLUSTER_INDEX = -19;
 
     public UmbrellaTreeSpecies(final ResourceLocation name, final Family family,
                                final LeavesProperties leavesProperties) {
         super(name, family, leavesProperties);
+    }
+
+    @Override
+    protected boolean transitionToTree(final Level level, final BlockPos pos, final Family family) {
+        if (!super.transitionToTree(level, pos, family)) return false;
+        final BlockPos rootPos = TreeHelper.findRootNode(level, pos);
+        UmbrellaGrowthForm.assignNew(level, rootPos == null ? pos.below() : rootPos, level.getRandom());
+        getLeavesProperties().getDynamicLeavesBlock().ifPresent(block ->
+                UmbrellaTreeGrowthCanopy.placeInitialGrowthCanopy(level, pos, block));
+        return true;
     }
 
     @Override
@@ -44,7 +59,9 @@ public final class UmbrellaTreeSpecies extends Species {
 
     @Override
     public LeavesProperties getValidLeavesProperties(final int index) {
-        if (isMembraneIndex(index) || index == CLUSTER_INDEX || index == NATURAL_CLUSTER_INDEX) {
+        if (isMembraneIndex(index) || isDynamicMembraneIndex(index)
+                || index == CLUSTER_INDEX || index == NATURAL_CLUSTER_INDEX
+                || index == DYNAMIC_CLUSTER_INDEX) {
             return getLeavesProperties();
         }
         return super.getValidLeavesProperties(index);
@@ -72,7 +89,8 @@ public final class UmbrellaTreeSpecies extends Species {
         for (final BlockPos end : finder.getEnds()) {
             for (final BlockPos pos : BlockPos.betweenClosed(end.offset(-12, -12, -12), end.offset(12, 12, 12))) {
                 if (!level.hasChunkAt(pos)) continue;
-                if (level.getBlockState(pos).is(membrane)) return true;
+                final BlockState state = level.getBlockState(pos);
+                if (state.is(membrane) || UmbrellaLeavesProperties.isMembrane(state)) return true;
             }
         }
         return false;
@@ -81,13 +99,15 @@ public final class UmbrellaTreeSpecies extends Species {
     @Override
     public boolean canEncodeLeavesBlocks(final BlockPos pos, final BlockState state, final Block block,
                                          final BranchDestructionData destructionData) {
-        return isSpecialBlock(block) || super.canEncodeLeavesBlocks(pos, state, block, destructionData);
+        return UmbrellaLeavesProperties.isSpecial(state)
+                || isSpecialBlock(block)
+                || super.canEncodeLeavesBlocks(pos, state, block, destructionData);
     }
 
     @Override
     public int encodeLeavesPos(final BlockPos pos, final BlockState state, final Block block,
                                final BranchDestructionData destructionData) {
-        return isSpecialBlock(block)
+        return (UmbrellaLeavesProperties.isSpecial(state) || isSpecialBlock(block))
                 ? BranchDestructionData.encodeRelBlockPos(pos)
                 : super.encodeLeavesPos(pos, state, block, destructionData);
     }
@@ -95,6 +115,10 @@ public final class UmbrellaTreeSpecies extends Species {
     @Override
     public int encodeLeavesBlocks(final BlockPos pos, final BlockState state, final Block block,
                                   final BranchDestructionData destructionData) {
+        if (UmbrellaLeavesProperties.isMembrane(state)) {
+            return DYNAMIC_MEMBRANE_INDEX_BASE - getColor(state);
+        }
+        if (UmbrellaLeavesProperties.isCluster(state)) return DYNAMIC_CLUSTER_INDEX;
         if (isMembrane(block)) return MEMBRANE_INDEX_BASE - getColor(state);
         if (isCluster(block)) return isNatural(state) ? NATURAL_CLUSTER_INDEX : CLUSTER_INDEX;
         return super.encodeLeavesBlocks(pos, state, block, destructionData);
@@ -103,12 +127,19 @@ public final class UmbrellaTreeSpecies extends Species {
     @Override
     public HashMap<BlockPos, BlockState> getFellingLeavesClusters(final BranchDestructionData destructionData) {
         final HashMap<BlockPos, BlockState> blocks = new HashMap<>();
+        final Block dynamicLeaves = getLeavesProperties().getDynamicLeavesBlock().orElse(null);
         for (int index = 0; index < destructionData.getNumLeaves(); index++) {
             final int blockIndex = destructionData.destroyedLeavesBlockIndex[index];
             final BlockState state;
             if (isMembraneIndex(blockIndex)) {
                 state = withColor(BuiltInRegistries.BLOCK.get(MEMBRANE_ID).defaultBlockState(),
                         MEMBRANE_INDEX_BASE - blockIndex);
+            } else if (isDynamicMembraneIndex(blockIndex)) {
+                state = dynamicLeaves == null ? null : UmbrellaLeavesProperties.membraneState(
+                        dynamicLeaves, DYNAMIC_MEMBRANE_INDEX_BASE - blockIndex, false);
+            } else if (blockIndex == DYNAMIC_CLUSTER_INDEX) {
+                state = dynamicLeaves == null ? null
+                        : UmbrellaLeavesProperties.clusterState(dynamicLeaves, false);
             } else if (blockIndex == CLUSTER_INDEX || blockIndex == NATURAL_CLUSTER_INDEX) {
                 state = withNatural(BuiltInRegistries.BLOCK.get(CLUSTER_ID).defaultBlockState(),
                         blockIndex == NATURAL_CLUSTER_INDEX);
@@ -135,6 +166,11 @@ public final class UmbrellaTreeSpecies extends Species {
     private static boolean isMembraneIndex(final int index) {
         return index <= MEMBRANE_INDEX_BASE
                 && index > MEMBRANE_INDEX_BASE - MEMBRANE_COLOR_COUNT;
+    }
+
+    private static boolean isDynamicMembraneIndex(final int index) {
+        return index <= DYNAMIC_MEMBRANE_INDEX_BASE
+                && index > DYNAMIC_MEMBRANE_INDEX_BASE - MEMBRANE_COLOR_COUNT;
     }
 
     private static int getColor(final BlockState state) {

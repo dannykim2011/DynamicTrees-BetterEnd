@@ -2,7 +2,6 @@ package com.dannykim.dtbetterend.systems.featuregen;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.configuration.ConfigurationProperty;
-import com.ferreusveritas.dynamictrees.api.network.MapSignal;
 import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
 import com.ferreusveritas.dynamictrees.block.branch.TrunkShellBlock;
 import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
@@ -10,7 +9,6 @@ import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeatureConfiguratio
 import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGenerationContext;
 import com.ferreusveritas.dynamictrees.systems.genfeature.context.PreGenerationContext;
 import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGrowContext;
-import com.ferreusveritas.dynamictrees.systems.nodemapper.FindEndsNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,7 +41,7 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
     public static void cleanupFailedWorldGen(final LevelAccessor level, final BlockPos rootPos,
                                              final BranchBlock branch, final Block membrane,
                                              final Block dynamicLeaves, final BlockState initialDirtState) {
-        removeFailedTree(level, rootPos, null, branch, membrane, dynamicLeaves, false, initialDirtState);
+        removeFailedTree(level, rootPos, null, branch, membrane, dynamicLeaves, initialDirtState);
     }
 
     @Override
@@ -71,90 +69,13 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
     protected boolean postGenerate(final GenFeatureConfiguration configuration,
                                    final PostGenerationContext context) {
         return placeCanopies(configuration, context.level(), context.pos(), context.endPoints(),
-                context.radius(), context.species().getFamily().getBranch().orElse(null), false,
+                context.radius(), context.species().getFamily().getBranch().orElse(null),
                 context.initialDirtState());
     }
 
     @Override
     protected boolean postGrow(final GenFeatureConfiguration configuration, final PostGrowContext context) {
-        if (context.fertility() <= 0 || context.fertility() > 7
-                || configuration.get(MEMBRANE_BLOCK) == Blocks.AIR) return false;
-        if (growthForm(context.pos()) == 2) {
-            context.species().getFamily().getBranch().ifPresent(branch -> completeDoubleBranches(
-                    context.level(), context.pos(), configuration.get(TARGET_BLOCK), branch,
-                    configuration.get(MAX_RADIUS)));
-        }
-        final FindEndsNode endFinder = new FindEndsNode();
-        TreeHelper.startAnalysisFromRoot(context.level(), context.pos(), new MapSignal(endFinder));
-        if (hasExistingCanopy(endFinder.getEnds(), context.level(), configuration.get(MEMBRANE_BLOCK))) return false;
-        return placeCanopies(configuration, context.level(), context.pos(), endFinder.getEnds(),
-                TreeHelper.getRadius(context.level(), context.treePos()),
-                context.species().getFamily().getBranch().orElse(null), true, null);
-    }
-
-    public static boolean completeDoubleBranches(final LevelAccessor level, final BlockPos rootPos,
-                                                 final Block dynamicLeaves, final BranchBlock branch,
-                                                 final int canopyRadius) {
-        if (growthForm(rootPos) != 2 || branch == null) return false;
-        final FindEndsNode finder = new FindEndsNode();
-        TreeHelper.startAnalysisFromRoot(level, rootPos, new MapSignal(finder));
-        final List<BlockPos> ends = finder.getEnds().stream().distinct()
-                .filter(pos -> horizontalDistanceSquared(rootPos, pos) > 0)
-                .sorted((a, b) -> Integer.compare(score(level, b), score(level, a)))
-                .limit(2).toList();
-        if (ends.size() != 2) return false;
-        final long hash = treeHash(rootPos);
-        final int targetHeight = 50 + Math.floorMod((int) (hash >>> 21), 31);
-        final List<List<BlockPos>> extensions = new ArrayList<>();
-        for (final BlockPos end : ends) {
-            final int directionX = Integer.signum(end.getX() - rootPos.getX());
-            final int directionZ = Integer.signum(end.getZ() - rootPos.getZ());
-            if (directionX == 0 && directionZ == 0) return false;
-            final List<BlockPos> extension = buildRisingCurve(end, directionX, directionZ,
-                    Math.max(9, canopyRadius + 1), rootPos.getY() + targetHeight, 3);
-            if (!canPlaceBranchPath(level, extension, dynamicLeaves)) return false;
-            extensions.add(extension);
-        }
-        for (final List<BlockPos> extension : extensions) {
-            final BlockState startState = level.getBlockState(extension.get(0));
-            final int startRadius = startState.getBlock() instanceof BranchBlock startBranch
-                    ? Math.min(8, Math.max(4, startBranch.getRadius(startState))) : 4;
-            final int steps = Math.max(1, extension.size() - 1);
-            for (int index = 1; index <= steps; index++) {
-                final BlockPos pos = extension.get(index);
-                final int desired = Math.max(1, Mth.ceil(startRadius * (1.0 - index / (double) (steps + 1))));
-                final BlockState state = level.getBlockState(pos);
-                if (state.getBlock() instanceof TrunkShellBlock) {
-                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
-                }
-                final int existing = state.getBlock() instanceof BranchBlock existingBranch
-                        ? existingBranch.getRadius(state) : 0;
-                if (desired > existing) {
-                    clearShellObstacles(level, pos, desired);
-                    branch.setRadius(level, pos, desired, null);
-                }
-            }
-        }
-        return true;
-    }
-
-    private static boolean canPlaceBranchPath(final LevelAccessor level, final List<BlockPos> path,
-                                              final Block dynamicLeaves) {
-        final Set<BlockPos> allowedCores = Set.of(path.get(0));
-        for (int index = 1; index < path.size(); index++) {
-            final BlockPos pos = path.get(index);
-            final BlockState state = level.getBlockState(pos);
-            if (state.getBlock() instanceof BranchBlock
-                    || isForeignTrunkShell(level, pos, state, allowedCores)) return false;
-        }
-        return true;
-    }
-
-    private static boolean isForeignTrunkShell(final LevelAccessor level, final BlockPos pos,
-                                               final BlockState state, final Set<BlockPos> allowedCores) {
-        if (!(state.getBlock() instanceof TrunkShellBlock shell)) return false;
-        final TrunkShellBlock.ShellMuse muse = shell.getMuse(level, state, pos);
-        return muse == null || !allowedCores.contains(muse.pos);
+        return UmbrellaTreeGrowthCanopy.postGrow(configuration, context);
     }
 
     private static void clearShellObstacles(final LevelAccessor level, final BlockPos corePos,
@@ -171,34 +92,17 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
         }
     }
 
-    private static long treeHash(final BlockPos rootPos) {
-        long hash = rootPos.getX() * 341873128712L ^ rootPos.getZ() * 132897987541L;
-        hash ^= hash >>> 17;
-        return hash;
-    }
-
-    private static boolean hasExistingCanopy(final List<BlockPos> ends, final LevelAccessor level,
-                                             final Block membrane) {
-        for (final BlockPos end : ends) {
-            for (final BlockPos pos : BlockPos.betweenClosed(end.offset(-2, -2, -2), end.offset(2, 2, 2))) {
-                if (level.getBlockState(pos).is(membrane)) return true;
-            }
-        }
-        return false;
-    }
-
     private static boolean placeCanopies(final GenFeatureConfiguration configuration,
                                          final LevelAccessor level,
                                          final BlockPos rootPos,
                                          final List<BlockPos> endPoints,
                                          final int trunkRadius,
                                          final BranchBlock supportingBranch,
-                                         final boolean growingTree,
                                          final BlockState initialDirtState) {
         final Block membrane = configuration.get(MEMBRANE_BLOCK);
         if (membrane == Blocks.AIR || endPoints.isEmpty()) {
             removeFailedTree(level, rootPos, null, supportingBranch, membrane,
-                    configuration.get(TARGET_BLOCK), growingTree, initialDirtState);
+                    configuration.get(TARGET_BLOCK), initialDirtState);
             return false;
         }
         final int baseRadius = Mth.clamp(configuration.get(MIN_RADIUS) + trunkRadius * 3 / 4,
@@ -213,7 +117,7 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
                 }).orElse(null);
         if (candidate == null) {
             removeFailedTree(level, rootPos, null, supportingBranch, membrane,
-                    configuration.get(TARGET_BLOCK), growingTree, initialDirtState);
+                    configuration.get(TARGET_BLOCK), initialDirtState);
             return false;
         }
         final List<BlockPos> candidates = new ArrayList<>();
@@ -222,22 +126,9 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
                 configuration.get(MIN_RADIUS) * 2);
         if (existingSecond != null) {
             candidates.add(existingSecond);
-        } else if (growingTree && growthForm(rootPos) == 2) {
-            final BlockPos second = createOppositeCrownBranch(level, rootPos, candidate, supportingBranch,
-                    configuration.get(TARGET_BLOCK), baseRadius);
-            if (second == null) {
-                removeFailedTree(level, rootPos, candidate, supportingBranch, membrane,
-                        configuration.get(TARGET_BLOCK), growingTree, initialDirtState);
-                return false;
-            }
-            candidates.add(second);
         }
         final List<CanopyPlan> plans = new ArrayList<>();
         final boolean doubleCrown = candidates.size() == 2;
-        final Set<BlockPos> completeSupportingTree = new HashSet<>();
-        for (final BlockPos crownEnd : candidates) {
-            completeSupportingTree.addAll(findBranchPath(level, rootPos, crownEnd));
-        }
         for (final BlockPos crownEnd : candidates) {
             final int requestedRadius = Mth.clamp(baseRadius
                             + Math.floorMod(Long.hashCode(crownEnd.asLong()), 5) - 2,
@@ -246,18 +137,18 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
             final int relativeHeight = crownEnd.getY() - rootPos.getY();
             if (doubleCrown && relativeHeight > 80) {
                 removeFailedTree(level, rootPos, candidate, supportingBranch, membrane,
-                        configuration.get(TARGET_BLOCK), growingTree, initialDirtState);
+                        configuration.get(TARGET_BLOCK), initialDirtState);
                 return false;
             }
             final int minimumLift = doubleCrown ? Math.max(0, 50 - relativeHeight) : 0;
             final int maximumLift = doubleCrown ? Math.max(0, 80 - relativeHeight) : 80;
             CanopyPlacement placement = findFreeCenter(level, crownEnd, requestedRadius,
                     configuration.get(MIN_RADIUS), membrane, configuration.get(TARGET_BLOCK), supportingBranch,
-                    doubleCrown ? completeSupportingTree : supportingPath, minimumLift, maximumLift, plans, doubleCrown);
+                    supportingPath, minimumLift, maximumLift, plans, doubleCrown);
             if (placement == null && doubleCrown && !plans.isEmpty()) {
                 placement = retryDoublePlacementWithShrunkFirst(level, crownEnd, requestedRadius,
                         3, membrane, configuration.get(TARGET_BLOCK), supportingBranch,
-                        completeSupportingTree, minimumLift, maximumLift, plans);
+                        supportingPath, minimumLift, maximumLift, plans);
             } else if (placement == null) {
                 placement = findFreeCenter(level, crownEnd, configuration.get(MIN_RADIUS) - 1,
                         3, membrane, configuration.get(TARGET_BLOCK), supportingBranch,
@@ -265,7 +156,7 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
             }
             if (placement == null) {
                 removeFailedTree(level, rootPos, candidate, supportingBranch, membrane,
-                        configuration.get(TARGET_BLOCK), growingTree, initialDirtState);
+                        configuration.get(TARGET_BLOCK), initialDirtState);
                 return false;
             }
             plans.add(new CanopyPlan(crownEnd, placement));
@@ -278,16 +169,16 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
             if (supportingBranch == null
                     || level.getBlockState(plan.placement().center().above()).getBlock() != supportingBranch) {
                 removeFailedTree(level, rootPos, plan.endPoint(), supportingBranch, membrane,
-                        configuration.get(TARGET_BLOCK), growingTree, initialDirtState);
+                        configuration.get(TARGET_BLOCK), initialDirtState);
                 return false;
             }
         }
         for (final CanopyPlan plan : plans) {
-            final int membranePlaced = placeMembrane(configuration, level, plan.placement().center(),
+            final int membranePlaced = placeWorldGenMembrane(configuration, level, plan.placement().center(),
                     plan.placement().radius());
             if (membranePlaced == 0) {
                 removeFailedTree(level, rootPos, plan.endPoint(), supportingBranch, membrane,
-                        configuration.get(TARGET_BLOCK), growingTree, initialDirtState);
+                        configuration.get(TARGET_BLOCK), initialDirtState);
                 return false;
             }
             placed += membranePlaced;
@@ -298,10 +189,10 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
         return placed > 0;
     }
 
-    private static int placeMembrane(final GenFeatureConfiguration configuration,
-                                     final LevelAccessor level,
-                                     final BlockPos center,
-                                     final int radius) {
+    private static int placeWorldGenMembrane(final GenFeatureConfiguration configuration,
+                                             final LevelAccessor level,
+                                             final BlockPos center,
+                                             final int radius) {
         final Block target = configuration.get(TARGET_BLOCK);
         final BlockState membrane = configuration.get(MEMBRANE_BLOCK).defaultBlockState();
         final double phase = Math.floorMod(Long.hashCode(center.asLong()), 628) / 100.0;
@@ -310,6 +201,7 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
                 Math.max(1, radius - minimumRays + 1));
         final int verticalRange = radius + 3;
         final Set<BlockPos> placedPositions = new HashSet<>();
+
         for (int x = -radius - 2; x <= radius + 2; x++) {
             for (int z = -radius - 2; z <= radius + 2; z++) {
                 final double angle = Math.atan2(z, x);
@@ -317,6 +209,7 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
                 final double radialSq = (double) x * x + (double) z * z;
                 final double radiusSq = localRadius * localRadius;
                 if (radialSq > radiusSq) continue;
+
                 final double normalizedRadius = Math.sqrt(radialSq) / localRadius;
                 final int peakHeight = Math.max(3, Mth.ceil(radius * 0.4));
                 final int rimDrop = Math.max(4, Mth.ceil(radius * 0.8));
@@ -329,6 +222,7 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
                     final boolean inUmbrella = y <= surfaceY && y > surfaceY - thickness;
                     final BlockPos pos = center.offset(x, y, z);
                     final BlockState state = level.getBlockState(pos);
+
                     if (inUmbrella && !(x == 0 && z == 0 && y == 1)) {
                         if (!(state.getBlock() instanceof BranchBlock) && !state.is(membrane.getBlock())) {
                             level.setBlock(pos, withColor(membrane, color), Block.UPDATE_CLIENTS);
@@ -410,10 +304,6 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
         return x * x + z * z;
     }
 
-    private static int growthForm(final BlockPos rootPos) {
-        return Math.floorMod((int) (treeHash(rootPos) >>> 7), 3);
-    }
-
     private static BlockPos findSecondCrownEnd(final BlockPos primary, final List<BlockPos> endPoints,
                                                final int minimumSeparation) {
         BlockPos best = null;
@@ -427,106 +317,6 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
             }
         }
         return best;
-    }
-
-    private static BlockPos createOppositeCrownBranch(final LevelAccessor level, final BlockPos rootPos,
-                                                       final BlockPos primaryEnd, final BranchBlock branch,
-                                                       final Block dynamicLeaves, final int canopyRadius) {
-        if (branch == null) return null;
-        final List<BlockPos> mainPath = findBranchPath(level, rootPos, primaryEnd);
-        if (mainPath.size() < 8) return null;
-        final int splitHeight = rootPos.getY() + Math.max(8, (primaryEnd.getY() - rootPos.getY()) / 2);
-        BlockPos split = mainPath.get(0);
-        for (final BlockPos pos : mainPath) {
-            if (Math.abs(pos.getY() - splitHeight) < Math.abs(split.getY() - splitHeight)) split = pos;
-        }
-        final int dx = primaryEnd.getX() - split.getX();
-        final int dz = primaryEnd.getZ() - split.getZ();
-        int firstX = Integer.signum(dx);
-        int firstZ = Integer.signum(dz);
-        if (firstX == 0 && firstZ == 0) {
-            final int[][] vectors = {{0, -1}, {1, -1}, {1, 0}, {1, 1},
-                    {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}};
-            final int[] vector = vectors[Math.floorMod(Long.hashCode(rootPos.asLong()), vectors.length)];
-            firstX = vector[0];
-            firstZ = vector[1];
-        }
-        final int reach = Math.max(10, canopyRadius + 2);
-        final int targetHeight = Math.max(split.getY() + reach + 2, primaryEnd.getY() - 1);
-        final List<BlockPos> secondPath = buildRisingCurve(split, -firstX, -firstZ, reach, targetHeight, 3);
-        final Set<BlockPos> mainPositions = new HashSet<>(mainPath);
-        for (int index = 1; index < secondPath.size(); index++) {
-            final BlockPos pos = secondPath.get(index);
-            final BlockState state = level.getBlockState(pos);
-            if (mainPositions.contains(pos) || state.getBlock() instanceof BranchBlock
-                    || isForeignTrunkShell(level, pos, state, mainPositions)) return null;
-        }
-        final BlockState splitState = level.getBlockState(split);
-        final int splitRadius = splitState.getBlock() instanceof BranchBlock splitBranch
-                ? Math.max(splitBranch.getRadius(splitState), Mth.clamp(canopyRadius + 6, 12, 18))
-                : Mth.clamp(canopyRadius + 6, 12, 18);
-        final int steps = secondPath.size() - 1;
-        for (int index = 1; index <= steps; index++) {
-            final BlockPos pos = secondPath.get(index);
-            final double progress = index / (double) steps;
-            final int horizontalClearance = Math.max(Math.abs(pos.getX() - split.getX()),
-                    Math.abs(pos.getZ() - split.getZ()));
-            final int clearanceLimit = Math.max(4, horizontalClearance * 4);
-            final int desired = Math.min(clearanceLimit,
-                    Math.max(1, Mth.ceil(1 + (splitRadius - 1) * (1.0 - progress * progress))));
-            final BlockState state = level.getBlockState(pos);
-            final int existing = state.getBlock() instanceof BranchBlock existingBranch
-                    ? existingBranch.getRadius(state) : 0;
-            if (!(state.getBlock() instanceof BranchBlock) && !state.isAir()) {
-                level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
-            }
-            if (desired > existing) {
-                clearShellObstacles(level, pos, desired);
-                branch.setRadius(level, pos, desired, null);
-            }
-        }
-        return secondPath.get(secondPath.size() - 1);
-    }
-
-    private static List<BlockPos> buildRisingCurve(final BlockPos split, final int directionX,
-                                                    final int directionZ, final int reach, final int targetY,
-                                                    final int initialHorizontalClearance) {
-        final List<BlockPos> path = new ArrayList<>();
-        BlockPos cursor = split.immutable();
-        path.add(cursor);
-        int step = 0;
-        while (Math.max(Math.abs(cursor.getX() - split.getX()),
-                Math.abs(cursor.getZ() - split.getZ())) < initialHorizontalClearance) {
-            if (directionX != 0 && (directionZ == 0 || Math.floorMod(step, 2) == 0)) {
-                cursor = cursor.offset(directionX, 0, 0);
-            } else if (directionZ != 0) {
-                cursor = cursor.offset(0, 0, directionZ);
-            }
-            path.add(cursor.immutable());
-            step++;
-        }
-        final int rise = Math.max(reach, targetY - split.getY());
-        for (int level = 1; level <= rise; level++) {
-            final boolean diagonal = directionX != 0 && directionZ != 0;
-            final int desiredAxisOffset = diagonal
-                    ? Mth.ceil(Math.min(reach, reach * level / (double) rise) * 0.70710678)
-                    : Math.min(reach, Mth.ceil(reach * level / (double) rise));
-            final int currentX = Math.abs(cursor.getX() - split.getX());
-            final int currentZ = Math.abs(cursor.getZ() - split.getZ());
-            if (directionX != 0 && currentX < desiredAxisOffset
-                    && (directionZ == 0 || currentZ >= desiredAxisOffset || Math.floorMod(level, 2) == 0)) {
-                cursor = cursor.offset(directionX, 0, 0);
-                path.add(cursor.immutable());
-            } else if (directionZ != 0 && currentZ < desiredAxisOffset) {
-                cursor = cursor.offset(0, 0, directionZ);
-                path.add(cursor.immutable());
-            }
-            if (cursor.getY() < targetY) {
-                cursor = cursor.above();
-                path.add(cursor.immutable());
-            }
-        }
-        return path;
     }
 
     private static boolean overlapsAnotherPlan(final List<CanopyPlan> plans,
@@ -580,7 +370,7 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
             for (int lift = minimumLift; lift <= maximumLift; lift++) {
                 final BlockPos center = branchEnd.above(lift);
                 final CanopyPlacement placement = new CanopyPlacement(center, radius);
-                if (overlapsAnotherPlan(existingPlans, placement)) continue;
+                if (!prioritizeDouble && overlapsAnotherPlan(existingPlans, placement)) continue;
                 if (canPlaceCanopy(level, branchEnd, center, radius, membrane, dynamicLeaves, supportingBranch,
                         supportingPath, prioritizeDouble)) return placement;
             }
@@ -615,9 +405,8 @@ public final class UmbrellaTreeCanopyGenFeature extends GenFeature {
     private static void removeFailedTree(final LevelAccessor level, final BlockPos rootPos,
                                          final BlockPos branchSeed,
                                          final BranchBlock umbrellaBranch, final Block membrane,
-                                         final Block dynamicLeaves, final boolean growingTree,
+                                         final Block dynamicLeaves,
                                          final BlockState initialDirtState) {
-        if (growingTree) return;
         BlockPos seed = branchSeed;
         if (umbrellaBranch != null && (seed == null || level.getBlockState(seed).getBlock() != umbrellaBranch)) {
             seed = findRootBranch(level, rootPos, umbrellaBranch);
