@@ -1,6 +1,6 @@
 {
+  "type": "dtbetterend:umbrella",
   "primitive_leaves": "betterend:umbrella_tree_membrane",
   "cell_kit": "dynamictrees:dark_oak",
   "light_requirement": 0
 }
-

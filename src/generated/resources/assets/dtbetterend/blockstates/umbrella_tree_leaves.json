@@ -1,1 +1,14 @@
-{"variants":{"":{"model":"betterend:block/umbrella_tree_membrane_1"}}}
+{
+  "multipart": [
+    { "when": { "part": "normal" }, "apply": { "model": "betterend:block/umbrella_tree_membrane_1" } },
+    { "when": { "part": "cluster" }, "apply": { "model": "betterend:block/umbrella_tree_cluster" } },
+    { "when": { "part": "membrane", "color": "0" }, "apply": { "model": "betterend:block/umbrella_tree_membrane_0" } },
+    { "when": { "part": "membrane", "color": "1" }, "apply": { "model": "betterend:block/umbrella_tree_membrane_1" } },
+    { "when": { "part": "membrane", "color": "2" }, "apply": { "model": "betterend:block/umbrella_tree_membrane_2" } },
+    { "when": { "part": "membrane", "color": "3" }, "apply": { "model": "betterend:block/umbrella_tree_membrane_3" } },
+    { "when": { "part": "membrane", "color": "4" }, "apply": { "model": "betterend:block/umbrella_tree_membrane_4" } },
+    { "when": { "part": "membrane", "color": "5" }, "apply": { "model": "betterend:block/umbrella_tree_membrane_5" } },
+    { "when": { "part": "membrane", "color": "6" }, "apply": { "model": "betterend:block/umbrella_tree_membrane_6" } },
+    { "when": { "part": "membrane", "color": "7" }, "apply": { "model": "betterend:block/umbrella_tree_membrane_7" } }
+  ]
+}
