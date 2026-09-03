@@ -4,8 +4,6 @@ import com.dtteam.dynamictrees.api.registry.TypedRegistry;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.dtteam.dynamictrees.tree.species.Species;
 import com.dtteam.dynamictrees.model.FallingTreeEntityModel;
-import com.dtteam.dynamictrees.entity.FallingTreeEntity;
-import com.dtteam.dynamictrees.entity.animation.AnimationHandler;
 import com.dtteam.dynamictreesplus.block.mushroom.CapProperties;
 import com.dtteam.dynamictreesplus.block.mushroom.DynamicCapBlock;
 import com.dtteam.dynamictreesplus.block.mushroom.DynamicCapCenterBlock;
@@ -25,11 +23,6 @@ public class DecoratedMushroomSpecies extends HugeMushroomSpecies {
 
     public DecoratedMushroomSpecies(final ResourceLocation name, final Family family, final CapProperties capProperties) {
         super(name, family, capProperties);
-    }
-
-    @Override
-    public AnimationHandler selectAnimationHandler(final FallingTreeEntity entity) {
-        return new MushroomFellingAnimationHandler(super.selectAnimationHandler(entity));
     }
 
     @Override

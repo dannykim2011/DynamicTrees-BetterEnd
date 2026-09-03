@@ -40,8 +40,7 @@
               "name": "betterend:tenanea_leaves"
             },
             {
-              "type": "minecraft:item",
-              "name": "dtbetterend:tenanea_seed",
+              "type": "dynamictrees:seed_item",
               "conditions": [
                 {
                   "condition": "minecraft:survives_explosion"

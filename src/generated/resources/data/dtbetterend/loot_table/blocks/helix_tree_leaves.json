@@ -40,8 +40,7 @@
               "name": "betterend:helix_tree_leaves"
             },
             {
-              "type": "minecraft:item",
-              "name": "dtbetterend:helix_tree_seed",
+              "type": "dynamictrees:seed_item",
               "conditions": [
                 {
                   "condition": "minecraft:survives_explosion"
