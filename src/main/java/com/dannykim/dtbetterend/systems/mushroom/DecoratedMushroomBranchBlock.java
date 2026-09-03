@@ -119,6 +119,9 @@ public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
             }
 
             final BlockPos immutable = pos.immutable();
+            if (MossyGlowshroomDecorationCleanup.isHymenophore(state)) {
+                MossyGlowshroomDecorationCleanup.removeOwnedFur(level, immutable);
+            }
             final ItemStack decoration = new ItemStack(state.getBlock());
             if (!decoration.isEmpty() && !"mossy_glowshroom_fur".equals(
                     BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath())) {

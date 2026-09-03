@@ -6,8 +6,10 @@ import com.dtteam.dynamictrees.api.treedata.TreePart;
 import com.dtteam.dynamictrees.block.leaves.DynamicLeavesBlock;
 import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
 import com.dtteam.dynamictrees.utility.CoordUtils;
+import com.dannykim.dtbetterend.DynamicTreesBetterEnd;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -49,6 +51,31 @@ public class FurOuterLeaveProperties extends LeavesProperties {
                                             getOuter().defaultBlockState(),
                                     Block.UPDATE_ALL);
                         }
+                }
+            }
+
+            @Override
+            protected void affectNeighborsAfterRemoval(final BlockState state, final ServerLevel level,
+                                                       final BlockPos pos, final boolean movedByPiston) {
+                removeOwnedOuterDecorations(level, pos);
+                super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+            }
+
+            private void removeOwnedOuterDecorations(final ServerLevel level, final BlockPos supportPos) {
+                for (final Direction direction : ALL) {
+                    final BlockPos decorationPos = supportPos.relative(direction);
+                    final BlockState decoration = level.getBlockState(decorationPos);
+                    final Identifier id = BuiltInRegistries.BLOCK.getKey(decoration.getBlock());
+                    if (!"lucernia_outer_leaves".equals(id.getPath())
+                            || !("betterend".equals(id.getNamespace())
+                            || DynamicTreesBetterEnd.MOD_ID.equals(id.getNamespace()))) {
+                        continue;
+                    }
+                    if (decoration.hasProperty(BlockStateProperties.FACING)
+                            && decoration.getValue(BlockStateProperties.FACING) == direction) {
+                        level.setBlock(decorationPos, Blocks.AIR.defaultBlockState(),
+                                Block.UPDATE_ALL | Block.UPDATE_SUPPRESS_DROPS);
+                    }
                 }
             }
 

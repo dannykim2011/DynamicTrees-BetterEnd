@@ -29,4 +29,11 @@ public final class StableDynamicCapBlock extends DynamicCapBlock {
     public void tick(final BlockState state, final ServerLevel level, final BlockPos pos, final RandomSource random) {
         // Cap removal is owned by mushroom felling; a hand-made hole must not collapse the whole canopy.
     }
+
+    @Override
+    protected void affectNeighborsAfterRemoval(final BlockState state, final ServerLevel level,
+                                               final BlockPos pos, final boolean movedByPiston) {
+        MossyGlowshroomDecorationCleanup.removeOwnedFur(level, pos.below());
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+    }
 }
