@@ -1,4 +1,5 @@
 {
+  "lang_overrides": { "branch": "Helix Tree" },
   "common_leaves": "dtbetterend:helix_tree",
   "common_species": "dtbetterend:helix_tree",
   "primitive_log": "betterend:helix_tree_log",

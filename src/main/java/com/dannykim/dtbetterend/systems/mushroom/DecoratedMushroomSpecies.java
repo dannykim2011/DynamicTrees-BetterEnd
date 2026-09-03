@@ -4,8 +4,6 @@ import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.ferreusveritas.dynamictrees.models.FallingTreeEntityModel;
-import com.ferreusveritas.dynamictrees.entity.FallingTreeEntity;
-import com.ferreusveritas.dynamictrees.entity.animation.AnimationHandler;
 import com.ferreusveritas.dynamictreesplus.block.mushroom.CapProperties;
 import com.ferreusveritas.dynamictreesplus.block.mushroom.DynamicCapBlock;
 import com.ferreusveritas.dynamictreesplus.block.mushroom.DynamicCapCenterBlock;
@@ -25,11 +23,6 @@ public class DecoratedMushroomSpecies extends HugeMushroomSpecies {
 
     public DecoratedMushroomSpecies(final ResourceLocation name, final Family family, final CapProperties capProperties) {
         super(name, family, capProperties);
-    }
-
-    @Override
-    public AnimationHandler selectAnimationHandler(final FallingTreeEntity entity) {
-        return new MushroomFellingAnimationHandler(super.selectAnimationHandler(entity));
     }
 
     @Override

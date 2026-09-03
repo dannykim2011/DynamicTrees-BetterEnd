@@ -1,6 +1,5 @@
 package com.dannykim.dtbetterend;
 
-import com.dannykim.dtbetterend.loot.LootModifiers;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,7 +14,6 @@ public final class DynamicTreesBetterEnd {
 
     public DynamicTreesBetterEnd() {
         RegistryHandler.setup(MOD_ID);
-        LootModifiers.register(FMLJavaModLoadingContext.get().getModEventBus());
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> com.dannykim.dtbetterend.client.ThickBranchRingsSource::register);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> com.dannykim.dtbetterend.client.DTBetterEndClient::register);
         if (ModList.get().isLoaded("dynamictreesplus")) {
