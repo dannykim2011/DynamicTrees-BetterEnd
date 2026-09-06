@@ -12,13 +12,20 @@
   "growth_rate": 1.0,
   "soil_longevity": 4,
   "growth_logic_kit": "dtbetterend:neon_cactus",
-  "acceptable_soils": ["moss_or_dust", "end_like", "stone_like", "sand_like"],
-  "world_gen_acceptable_soils": ["moss_or_dust", "end_like", "stone_like", "sand_like"],
+  "acceptable_soils": [
+    "moss_or_dust"
+  ],
+  "world_gen_acceptable_soils": [
+    "moss_or_dust"
+  ],
   "preferred_climate": "arid",
   "climate_tolerance": 0.4,
   "cactus_thickness_logic": "dynamictreesplus:saguaro",
   "mega_species": "dynamictreesplus:mega_cactus",
   "perfect_biomes": {
     "name": "betterend:neon_oasis"
+  },
+  "lang_overrides": {
+    "seed": "Neon Cactus Seed"
   }
 }

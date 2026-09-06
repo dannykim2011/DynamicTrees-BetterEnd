@@ -1,32 +1,38 @@
 {
-    "family":  "dtbetterend:helix_tree",
-    "tapering":  0.25,
-    "signal_energy":  40.0,
-    "up_probability":  1,
-    "lowest_branch_height":  5,
-    "growth_rate":  1.0,
-    "soil_longevity":  16,
-    "growth_logic_kit":  "dtbetterend:helix_tree",
-    "leaves_properties":  "dtbetterend:helix_tree",
-    "environment_factors":  {
-                                "is_end":  1.05,
-                                "is_overworld":  0.8
-                            },
-    "acceptable_soils":  [
-                             "moss_or_dust"
-                         ],
-    "primitive_sapling":  "betterend:helix_tree_sapling",
-    "generate_seed":  true,
-    "generate_sapling":  true,
-    "features":  [
-        "dtbetterend:base_trunk_clearance",
-                     {
-                         "name":  "roots",
-                         "properties":  {
-                                            "min_trunk_radius":  13
-                                        }
-                     },
-                     "mound",
-                     "clear_volume"
-                 ]
+  "family": "dtbetterend:helix_tree",
+  "tapering": 0.25,
+  "signal_energy": 40.0,
+  "up_probability": 1,
+  "lowest_branch_height": 5,
+  "growth_rate": 1.0,
+  "soil_longevity": 16,
+  "growth_logic_kit": "dtbetterend:helix_tree",
+  "leaves_properties": "dtbetterend:helix_tree",
+  "environment_factors": {
+    "is_end": 1.05,
+    "is_overworld": 0.8
+  },
+  "acceptable_soils": [
+    "dtbe_amber_moss"
+  ],
+  "primitive_sapling": "betterend:helix_tree_sapling",
+  "generate_seed": true,
+  "generate_sapling": true,
+  "features": [
+    "dtbetterend:base_trunk_clearance",
+    {
+      "name": "roots",
+      "properties": {
+        "min_trunk_radius": 13
+      }
+    },
+    "mound",
+    "clear_volume"
+  ],
+  "world_gen_acceptable_soils": [
+    "dtbe_amber_moss"
+  ],
+  "lang_overrides": {
+    "seed": "Helix Tree Cone"
+  }
 }

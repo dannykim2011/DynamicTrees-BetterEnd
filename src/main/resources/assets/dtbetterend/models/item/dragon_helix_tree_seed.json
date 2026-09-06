@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dtbetterend:item/dragon_helix_tree_seed"
+  }
+}

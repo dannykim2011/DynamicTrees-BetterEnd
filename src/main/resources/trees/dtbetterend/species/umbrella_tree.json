@@ -59,5 +59,8 @@
         "max_height": 50
       }
     }
-  ]
+  ],
+  "lang_overrides": {
+    "seed": "Umbrella Tree Propagule"
+  }
 }

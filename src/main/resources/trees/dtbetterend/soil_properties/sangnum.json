@@ -1,0 +1,7 @@
+{
+  "primitive_soil": "betterend:sangnum",
+  "substitute_soil": "end_stone",
+  "acceptable_soils": [
+    "dtbe_sangnum"
+  ]
+}
