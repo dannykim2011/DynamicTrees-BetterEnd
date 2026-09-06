@@ -1,7 +1,9 @@
 {
-    "primitive_soil":"betterend:end_moss",
-    "acceptable_soils":[
-        "moss_or_dust"
-    ],
-    "substitute_soil":"end_stone"
+  "primitive_soil": "betterend:end_moss",
+  "acceptable_soils": [
+    "moss_or_dust",
+    "dtbe_end_moss",
+    "dtbe_foggy_soil"
+  ],
+  "substitute_soil": "end_stone"
 }

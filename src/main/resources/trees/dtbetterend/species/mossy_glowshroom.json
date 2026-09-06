@@ -1,43 +1,48 @@
 {
-    "lang_overrides": { "seed": "Mossy Glowshroom Cap" },
-    "only_if_loaded":  "dynamictreesplus",
-    "type":  "dtbetterend:decorated_mushroom",
-    "family":  "dtbetterend:mossy_glowshroom",
-    "generate_seed":  true,
-    "generate_sapling":  true,
-    "tapering":  0,
-    "signal_energy":  25,
-    "growth_rate":  0.75,
-    "soil_longevity":  12,
-    "max_branch_radius":  24,
-    "cap_properties":  "dtbetterend:mossy_glowshroom",
-    "mushroom_shape_kit":  "dtbetterend:mossy_glowshroom",
-    "growth_logic_kit":  "dtbetterend:mossy_glowshroom",
-    "primitive_sapling":  "betterend:mossy_glowshroom_sapling",
-    "acceptable_soils":  [
-                             "fungus_like",
-                             "moss_or_dust"
-                         ],
-    "perfect_biomes":  {
-                           "name":  "betterend:foggy_mushroomland"
-                       },
-    "features":  [
-        "dtbetterend:base_trunk_clearance",
-                     "bottom_flare",
-                     {
-                         "name":  "dtbetterend:mossy_glowshroom_details",
-                         "properties":  {
-                                            "target_block":  "dtbetterend:mossy_glowshroom_cap",
-                                            "target_center_block":  "dtbetterend:mossy_glowshroom_cap_center",
-                                            "hanging_block":  "betterend:mossy_glowshroom_hymenophore",
-                                            "secondary_block":  "betterend:mossy_glowshroom_fur",
-                                            "max_count":  24,
-                                            "max_height":  32
-                                        }
-                     },
-                     "mound"
-                 ],
-    "model_overrides":  {
-                            "sapling":  "dynamictrees:block/smartmodel/mushroom_flat"
-                        }
+  "lang_overrides": {
+    "seed": "Mossy Glowshroom Cap"
+  },
+  "only_if_loaded": "dynamictreesplus",
+  "type": "dtbetterend:decorated_mushroom",
+  "family": "dtbetterend:mossy_glowshroom",
+  "generate_seed": true,
+  "generate_sapling": true,
+  "tapering": 0,
+  "signal_energy": 25,
+  "growth_rate": 0.75,
+  "soil_longevity": 12,
+  "max_branch_radius": 24,
+  "cap_properties": "dtbetterend:mossy_glowshroom",
+  "mushroom_shape_kit": "dtbetterend:mossy_glowshroom",
+  "growth_logic_kit": "dtbetterend:mossy_glowshroom",
+  "primitive_sapling": "betterend:mossy_glowshroom_sapling",
+  "acceptable_soils": [
+    "dtbe_foggy_soil"
+  ],
+  "perfect_biomes": {
+    "name": "betterend:foggy_mushroomland"
+  },
+  "features": [
+    "dtbetterend:base_trunk_clearance",
+    "bottom_flare",
+    {
+      "name": "dtbetterend:mossy_glowshroom_details",
+      "properties": {
+        "target_block": "dtbetterend:mossy_glowshroom_cap",
+        "target_center_block": "dtbetterend:mossy_glowshroom_cap_center",
+        "hanging_block": "betterend:mossy_glowshroom_hymenophore",
+        "secondary_block": "betterend:mossy_glowshroom_fur",
+        "max_count": 24,
+        "max_height": 32
+      }
+    },
+    "mound"
+  ],
+  "model_overrides": {
+    "sapling": "dynamictrees:block/smartmodel/mushroom_flat"
+  },
+  "world_gen_acceptable_soils": [
+    "dtbe_foggy_soil"
+  ],
+  "accept_any_soil": false
 }

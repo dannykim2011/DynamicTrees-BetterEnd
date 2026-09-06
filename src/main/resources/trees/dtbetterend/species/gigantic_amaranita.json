@@ -1,44 +1,49 @@
 {
-    "lang_overrides": { "seed": "Gigantic Amaranita Cap" },
-    "only_if_loaded":  "dynamictreesplus",
-    "type":  "dtbetterend:decorated_mushroom",
-    "family":  "dtbetterend:gigantic_amaranita",
-    "generate_seed":  true,
-    "generate_sapling":  true,
-    "tapering":  0,
-    "signal_energy":  9,
-    "growth_rate":  0.9,
-    "soil_longevity":  6,
-    "max_branch_radius":  12,
-    "cap_properties":  "dtbetterend:gigantic_amaranita",
-    "mushroom_shape_kit":  "dtbetterend:gigantic_amaranita",
-    "growth_logic_kit":  "dtbetterend:gigantic_amaranita",
-    "primitive_sapling":  "betterend:small_amaranita_mushroom",
-    "acceptable_soils":  [
-                             "fungus_like",
-                             "moss_or_dust"
-                         ],
-    "perfect_biomes":  {
-                           "name":  "betterend:foggy_mushroomland"
-                       },
-    "features":  [
-        "dtbetterend:base_trunk_clearance",
-                     "bottom_flare",
-                     {
-                         "name":  "dtbetterend:gigantic_amaranita_details",
-                         "properties":  {
-                                            "target_block":  "dtbetterend:gigantic_amaranita_cap",
-                                            "target_center_block":  "dtbetterend:gigantic_amaranita_cap_center",
-                                            "underside_block":  "betterend:amaranita_hymenophore",
-                                            "hanging_block":  "betterend:amaranita_lantern",
-                                            "secondary_block":  "betterend:amaranita_fur",
-                                            "max_count":  16,
-                                            "max_height":  28
-                                        }
-                     },
-                     "mound"
-                 ],
-    "model_overrides":  {
-                            "sapling":  "dynamictrees:block/smartmodel/mushroom_flat"
-                        }
+  "lang_overrides": {
+    "seed": "Gigantic Amaranita Cap"
+  },
+  "only_if_loaded": "dynamictreesplus",
+  "type": "dtbetterend:decorated_mushroom",
+  "family": "dtbetterend:gigantic_amaranita",
+  "generate_seed": true,
+  "generate_sapling": true,
+  "tapering": 0,
+  "signal_energy": 9,
+  "growth_rate": 0.9,
+  "soil_longevity": 6,
+  "max_branch_radius": 12,
+  "cap_properties": "dtbetterend:gigantic_amaranita",
+  "mushroom_shape_kit": "dtbetterend:gigantic_amaranita",
+  "growth_logic_kit": "dtbetterend:gigantic_amaranita",
+  "primitive_sapling": "betterend:small_amaranita_mushroom",
+  "acceptable_soils": [
+    "dtbe_sangnum"
+  ],
+  "perfect_biomes": {
+    "name": "betterend:foggy_mushroomland"
+  },
+  "features": [
+    "dtbetterend:base_trunk_clearance",
+    "bottom_flare",
+    {
+      "name": "dtbetterend:gigantic_amaranita_details",
+      "properties": {
+        "target_block": "dtbetterend:gigantic_amaranita_cap",
+        "target_center_block": "dtbetterend:gigantic_amaranita_cap_center",
+        "underside_block": "betterend:amaranita_hymenophore",
+        "hanging_block": "betterend:amaranita_lantern",
+        "secondary_block": "betterend:amaranita_fur",
+        "max_count": 16,
+        "max_height": 28
+      }
+    },
+    "mound"
+  ],
+  "model_overrides": {
+    "sapling": "dynamictrees:block/smartmodel/mushroom_flat"
+  },
+  "world_gen_acceptable_soils": [
+    "dtbe_sangnum"
+  ],
+  "accept_any_soil": false
 }

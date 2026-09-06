@@ -10,7 +10,7 @@
   "max_branch_radius": 12,
   "max_signal_depth": 16,
   "texture_overrides": {
-    "branch": "betterend:block/amaranita_stem_middle",
-    "branch_top": "betterend:block/amaranita_stem_top"
+    "branch": "betterend:block/amaranita_hyphae_side",
+    "branch_top": "betterend:block/amaranita_hyphae_top"
   }
 }
