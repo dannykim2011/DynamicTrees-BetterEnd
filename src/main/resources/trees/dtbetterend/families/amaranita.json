@@ -1,9 +1,9 @@
 {
-  "lang_overrides": { "branch": "Gigantic Amaranita", "branch_item": "Gigantic Amaranita" },
+  "lang_overrides": { "branch": "Amaranita", "branch_item": "Amaranita" },
   "only_if_loaded": "dynamictreesplus",
   "type": "dtbetterend:decorated_mushroom",
-  "common_cap": "dtbetterend:gigantic_amaranita",
-  "common_species": "dtbetterend:gigantic_amaranita",
+  "common_cap": "dtbetterend:amaranita",
+  "common_species": "dtbetterend:amaranita",
   "primitive_log": "betterend:amaranita_stem",
   "stick": "air",
   "generate_stripped_branch": false,

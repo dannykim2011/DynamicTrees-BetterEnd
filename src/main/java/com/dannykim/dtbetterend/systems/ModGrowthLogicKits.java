@@ -15,7 +15,7 @@ public class ModGrowthLogicKits {
     public static final GrowthLogicKit UMBRELLA_TREE = new UmbrellaTreeLogic(DynamicTreesBetterEnd.location("umbrella_tree"));
     public static final GrowthLogicKit HELIX_TREE = new HelixTreeLogic(DynamicTreesBetterEnd.location("helix_tree"));
     public static final GrowthLogicKit NEON_CACTUS = new NeonCactusLogic(DynamicTreesBetterEnd.location("neon_cactus"));
-    public static final GrowthLogicKit GIGANTIC_AMARANITA = new MushroomStemLogic(DynamicTreesBetterEnd.location("gigantic_amaranita"), 18, 2);
+    public static final GrowthLogicKit GIGANTIC_AMARANITA = new MushroomStemLogic(DynamicTreesBetterEnd.location("amaranita"), 18, 2);
     public static final GrowthLogicKit JELLYSHROOM = new MushroomStemLogic(DynamicTreesBetterEnd.location("jellyshroom"), 12, 3);
     public static final GrowthLogicKit MOSSY_GLOWSHROOM = new MushroomStemLogic(DynamicTreesBetterEnd.location("mossy_glowshroom"), 15, 2);
 

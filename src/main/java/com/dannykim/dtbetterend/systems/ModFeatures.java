@@ -28,7 +28,7 @@ public final class ModFeatures {
             );
     public static final GenFeature GIGANTIC_AMARANITA_DETAILS =
             new BetterEndDecorationsGenFeature(
-                    DynamicTreesBetterEnd.location("gigantic_amaranita_details"),
+                    DynamicTreesBetterEnd.location("amaranita_details"),
                     BetterEndDecorationsGenFeature.Kind.GIGANTIC_AMARANITA
             );
 

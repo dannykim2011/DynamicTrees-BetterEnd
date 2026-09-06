@@ -2,19 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0,
-      "conditions": [
-        {
-          "chances": [
-            0.2,
-            0.2333333,
-            0.2666666,
-            0.3
-          ],
-          "condition": "minecraft:table_bonus",
-          "enchantment": "minecraft:silk_touch"
-        }
-      ],
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -42,18 +30,33 @@
             },
             {
               "type": "minecraft:item",
-              "name": "betterend:small_amaranita_mushroom"
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 2.0,
+                    "min": -6.0
+                  },
+                  "function": "minecraft:set_count"
+                },
+                {
+                  "function": "minecraft:limit_count",
+                  "limit": {
+                    "min": 0.0
+                  }
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ],
+              "name": "dtbetterend:amaranita_seed"
             }
           ]
         }
       ],
-      "functions": [
-        {
-          "function": "minecraft:explosion_decay"
-        }
-      ],
-      "rolls": 1
+      "rolls": 1.0
     }
   ],
-  "random_sequence": "dtbetterend:trees/mushroom_caps/gigantic_amaranita"
+  "random_sequence": "dtbetterend:blocks/amaranita_cap"
 }

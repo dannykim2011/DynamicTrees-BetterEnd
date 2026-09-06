@@ -169,7 +169,7 @@
       "name": "betterend:dragon_graveyards"
     },
     "apply": {
-      "species": "dtbetterend:gigantic_amaranita",
+      "species": "dtbetterend:amaranita",
       "density": [
         0.42
       ],
