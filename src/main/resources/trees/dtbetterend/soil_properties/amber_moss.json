@@ -1,0 +1,7 @@
+{
+  "primitive_soil": "betterend:amber_moss",
+  "substitute_soil": "end_stone",
+  "acceptable_soils": [
+    "dtbe_amber_moss"
+  ]
+}

@@ -1,39 +1,43 @@
 {
-    "family":  "dtbetterend:pythadendron",
-    "tapering":  0.8,
-    "signal_energy":  64.0,
-    "up_probability":  0.6,
-    "lowest_branch_height":  5,
-    "growth_rate":  1.5,
-    "soil_longevity":  20,
-    "max_branch_radius":  24,
-    "growth_logic_kit":  {
-                             "name":  "dtbetterend:pythadendron",
-                             "properties":  {
-
-                                            }
-                         },
-    "leaves_properties":  "dtbetterend:pythadendron",
-    "perfect_biomes":  {
-                           "name":  "betterend:chorus_forest"
-                       },
-    "acceptable_soils":  [
-                             "chorus_nylium"
-                         ],
-    "primitive_sapling":  "betterend:pythadendron_sapling",
-    "always_show_on_waila":  false,
-    "generate_seed":  true,
-    "generate_sapling":  true,
-    "features":  [
-        "dtbetterend:base_trunk_clearance",
-                     {
-                         "name":  "roots",
-                         "properties":  {
-                                            "min_trunk_radius":  13
-                                        }
-                     },
-                     "mound",
-                     "clear_volume",
-                     "dtbetterend:remove_broken_chorus"
-                 ]
+  "family": "dtbetterend:pythadendron",
+  "tapering": 0.8,
+  "signal_energy": 64.0,
+  "up_probability": 0.6,
+  "lowest_branch_height": 5,
+  "growth_rate": 1.5,
+  "soil_longevity": 20,
+  "max_branch_radius": 24,
+  "growth_logic_kit": {
+    "name": "dtbetterend:pythadendron",
+    "properties": {}
+  },
+  "leaves_properties": "dtbetterend:pythadendron",
+  "perfect_biomes": {
+    "name": "betterend:chorus_forest"
+  },
+  "acceptable_soils": [
+    "chorus_nylium"
+  ],
+  "primitive_sapling": "betterend:pythadendron_sapling",
+  "always_show_on_waila": false,
+  "generate_seed": true,
+  "generate_sapling": true,
+  "features": [
+    "dtbetterend:base_trunk_clearance",
+    {
+      "name": "roots",
+      "properties": {
+        "min_trunk_radius": 13
+      }
+    },
+    "mound",
+    "clear_volume",
+    "dtbetterend:remove_broken_chorus"
+  ],
+  "world_gen_acceptable_soils": [
+    "chorus_nylium"
+  ],
+  "lang_overrides": {
+    "seed": "Pythadendron Propagule"
+  }
 }

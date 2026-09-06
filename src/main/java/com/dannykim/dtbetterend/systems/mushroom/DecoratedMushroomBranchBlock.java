@@ -25,6 +25,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
+    private static final int CAP_CENTER_SEARCH_HEIGHT = 5;
+    private static final int CAP_CENTER_SEARCH_RADIUS = 10;
+
     public DecoratedMushroomBranchBlock(final ResourceLocation name, final Properties properties) {
         super(name, properties);
     }
@@ -37,13 +40,88 @@ public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
                                    final @NotNull List<BlockPos> endPoints,
                                    final @NotNull Map<BlockPos, BlockState> destroyedCapBlocks,
                                    final @NotNull List<BranchBlock.ItemStackPos> drops) {
-        final Map<BlockPos, BlockState> protectedCaps = this.hideStandingCapOverlaps(level, species, endPoints);
+        final List<BlockPos> capEndPoints = this.resolveCapEndPoints(level, species, endPoints);
+        final Map<BlockPos, BlockState> protectedCaps = this.hideStandingCapOverlaps(level, species, capEndPoints);
+        this.removeAttachedDecorations(level, this.getPresentCapBlocks(level, species, capEndPoints));
         try {
-            super.destroyMushroomCap(level, cutPos, species, tool, endPoints, destroyedCapBlocks, drops);
+            super.destroyMushroomCap(level, cutPos, species, tool, capEndPoints, destroyedCapBlocks, drops);
         } finally {
             protectedCaps.forEach((pos, state) -> level.setBlock(pos, state, Block.UPDATE_CLIENTS));
         }
-        this.removeAttachedDecorations(level, cutPos, destroyedCapBlocks, drops);
+        this.removeAttachedDecorations(level, this.toAbsolutePositions(cutPos, destroyedCapBlocks));
+    }
+
+    private List<BlockPos> resolveCapEndPoints(
+            final Level level,
+            final com.dtteam.dynamictrees.tree.species.Species species,
+            final List<BlockPos> endPoints) {
+        if (!(species instanceof HugeMushroomSpecies mushroomSpecies)) return endPoints;
+        final Block capCenter = mushroomSpecies.getCapProperties().getDynamicCapCenterBlock().orElse(null);
+        if (capCenter == null) return endPoints;
+
+        final List<BlockPos> resolved = new ArrayList<>();
+        final Set<BlockPos> seen = new HashSet<>();
+        for (final BlockPos endPoint : endPoints) {
+            boolean found = false;
+            for (int y = -2; y <= CAP_CENTER_SEARCH_HEIGHT; y++) {
+                for (int x = -CAP_CENTER_SEARCH_RADIUS; x <= CAP_CENTER_SEARCH_RADIUS; x++) {
+                    for (int z = -CAP_CENTER_SEARCH_RADIUS; z <= CAP_CENTER_SEARCH_RADIUS; z++) {
+                        final BlockPos center = endPoint.offset(x, y, z);
+                        if (level.getBlockState(center).getBlock() != capCenter) continue;
+                        final int age = DynamicCapCenterBlock.getCapAge(level, center);
+                        if (age < 0
+                                || !this.capTouchesEndPoint(level, mushroomSpecies, center, age, endPoint)) continue;
+                        final BlockPos resolvedEnd = center.below().immutable();
+                        if (seen.add(resolvedEnd)) resolved.add(resolvedEnd);
+                        found = true;
+                    }
+                }
+            }
+            final BlockPos original = endPoint.immutable();
+            if (!found && seen.add(original)) resolved.add(original);
+        }
+        return resolved;
+    }
+
+    private boolean capTouchesEndPoint(final Level level, final HugeMushroomSpecies species,
+                                       final BlockPos center, final int age, final BlockPos endPoint) {
+        for (final BlockPos capPos : species.getMushroomShapeKit().getShapeCluster(
+                new MushroomCapContext(level, center, species, age))) {
+            if (capPos.distManhattan(endPoint) == 1 && this.isSpeciesCap(level, species, capPos)) return true;
+        }
+        return false;
+    }
+
+    private Set<BlockPos> getPresentCapBlocks(final Level level,
+                                              final com.dtteam.dynamictrees.tree.species.Species species,
+                                              final List<BlockPos> endPoints) {
+        final Set<BlockPos> blocks = new HashSet<>();
+        if (!(species instanceof HugeMushroomSpecies mushroomSpecies)) return blocks;
+        for (final BlockPos endPoint : endPoints) {
+            final BlockPos center = endPoint.above();
+            final int age = DynamicCapCenterBlock.getCapAge(level, center);
+            if (age < 0) continue;
+            for (final BlockPos capPos : mushroomSpecies.getMushroomShapeKit().getShapeCluster(
+                    new MushroomCapContext(level, center, mushroomSpecies, age))) {
+                if (this.isSpeciesCap(level, mushroomSpecies, capPos)) blocks.add(capPos.immutable());
+            }
+        }
+        return blocks;
+    }
+
+    private boolean isSpeciesCap(final Level level, final HugeMushroomSpecies species, final BlockPos pos) {
+        final Block block = level.getBlockState(pos).getBlock();
+        return block == species.getCapProperties().getDynamicCapBlock().orElse(null)
+                || block == species.getCapProperties().getDynamicCapCenterBlock().orElse(null);
+    }
+
+    private Set<BlockPos> toAbsolutePositions(final BlockPos cutPos,
+                                              final Map<BlockPos, BlockState> relativeBlocks) {
+        final Set<BlockPos> positions = new HashSet<>();
+        for (final BlockPos relative : relativeBlocks.keySet()) {
+            positions.add(cutPos.offset(relative.getX(), relative.getY(), relative.getZ()).immutable());
+        }
+        return positions;
     }
 
     private Map<BlockPos, BlockState> hideStandingCapOverlaps(
@@ -120,14 +198,10 @@ public class DecoratedMushroomBranchBlock extends MushroomBranchBlock {
         return protectedCaps;
     }
 
-    private void removeAttachedDecorations(final Level level,
-                                           final BlockPos cutPos,
-                                           final Map<BlockPos, BlockState> destroyedCapBlocks,
-                                           final List<BranchBlock.ItemStackPos> drops) {
+    private void removeAttachedDecorations(final Level level, final Set<BlockPos> capBlocks) {
         final ArrayDeque<BlockPos> queue = new ArrayDeque<>();
         final Set<BlockPos> visited = new HashSet<>();
-        for (final BlockPos relPos : new ArrayList<>(destroyedCapBlocks.keySet())) {
-            final BlockPos absPos = cutPos.offset(relPos.getX(), relPos.getY(), relPos.getZ());
+        for (final BlockPos absPos : capBlocks) {
             visited.add(absPos);
             for (final Direction direction : Direction.values()) {
                 queue.add(absPos.relative(direction));

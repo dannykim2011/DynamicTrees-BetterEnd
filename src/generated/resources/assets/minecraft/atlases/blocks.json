@@ -10,7 +10,7 @@
     },
     {
       "type": "dynamictrees:thick_branch_rings",
-      "resource": "betterend:block/amaranita_stem_top"
+      "resource": "betterend:block/amaranita_hyphae_top"
     },
     {
       "type": "dynamictrees:thick_branch_rings",
