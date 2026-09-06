@@ -18,7 +18,7 @@ public final class DTPlusRegistries {
     private static final MushroomShapeKit JELLYSHROOM =
             new JellyshroomShape(DynamicTreesBetterEnd.location("jellyshroom"));
     private static final MushroomShapeKit GIGANTIC_AMARANITA =
-            new GiganticAmaranitaShape(DynamicTreesBetterEnd.location("gigantic_amaranita"));
+            new GiganticAmaranitaShape(DynamicTreesBetterEnd.location("amaranita"));
 
     private DTPlusRegistries() {
     }

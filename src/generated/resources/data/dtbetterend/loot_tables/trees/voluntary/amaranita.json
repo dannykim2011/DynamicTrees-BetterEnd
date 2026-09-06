@@ -12,11 +12,11 @@
               "rarity": 1.0
             }
           ],
-          "name": "dtbetterend:gigantic_amaranita_seed"
+          "name": "dtbetterend:amaranita_seed"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "dtbetterend:trees/voluntary/gigantic_amaranita"
+  "random_sequence": "dtbetterend:trees/voluntary/amaranita"
 }

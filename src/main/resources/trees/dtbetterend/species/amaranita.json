@@ -1,10 +1,10 @@
 {
   "lang_overrides": {
-    "seed": "Gigantic Amaranita Cap"
+    "seed": "Amaranita Cap"
   },
   "only_if_loaded": "dynamictreesplus",
   "type": "dtbetterend:decorated_mushroom",
-  "family": "dtbetterend:gigantic_amaranita",
+  "family": "dtbetterend:amaranita",
   "generate_seed": true,
   "generate_sapling": true,
   "tapering": 0,
@@ -12,9 +12,9 @@
   "growth_rate": 0.9,
   "soil_longevity": 6,
   "max_branch_radius": 12,
-  "cap_properties": "dtbetterend:gigantic_amaranita",
-  "mushroom_shape_kit": "dtbetterend:gigantic_amaranita",
-  "growth_logic_kit": "dtbetterend:gigantic_amaranita",
+  "cap_properties": "dtbetterend:amaranita",
+  "mushroom_shape_kit": "dtbetterend:amaranita",
+  "growth_logic_kit": "dtbetterend:amaranita",
   "primitive_sapling": "betterend:small_amaranita_mushroom",
   "acceptable_soils": [
     "dtbe_sangnum"
@@ -26,10 +26,10 @@
     "dtbetterend:base_trunk_clearance",
     "bottom_flare",
     {
-      "name": "dtbetterend:gigantic_amaranita_details",
+      "name": "dtbetterend:amaranita_details",
       "properties": {
-        "target_block": "dtbetterend:gigantic_amaranita_cap",
-        "target_center_block": "dtbetterend:gigantic_amaranita_cap_center",
+        "target_block": "dtbetterend:amaranita_cap",
+        "target_center_block": "dtbetterend:amaranita_cap_center",
         "underside_block": "betterend:amaranita_hymenophore",
         "hanging_block": "betterend:amaranita_lantern",
         "secondary_block": "betterend:amaranita_fur",
