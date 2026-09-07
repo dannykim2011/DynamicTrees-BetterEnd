@@ -1,6 +1,8 @@
 ## Dynamic Trees for BetterEnd
 
+
 Bring Dynamic Trees support to the trees and giant fungi added by BetterEnd.
+
 
 This addon integrates BetterEnd's vegetation with Dynamic Trees, allowing it to  
 behave just like a native Dynamic Trees species. Instead of using BetterEnd's  
