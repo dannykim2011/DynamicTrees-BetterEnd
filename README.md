@@ -13,21 +13,19 @@ intended by BetterEnd.
 ## Features
 
 * 🌳 **Dynamic Trees compatibility for BetterEnd's trees and fungi** – Makes  
-supported BetterEnd species grow, branch, and behave like native Dynamic  
-Trees species.
+supported BetterEnd species grow, branch, and behave like native Dynamic Trees species.  
 * ❤️ **Full fungi support** – Giant fungi generate and function naturally  
-with Dynamic Trees, preserving BetterEnd's intended gameplay and mechanics.
+with Dynamic Trees, preserving BetterEnd's intended gameplay and mechanics.  
 * 🌱 **Seamless integration** – Includes Dynamic Trees features such as dynamic  
-growth, falling trees, seeds, saplings, and world generation compatibility.
-* 🍄 **Optional Dynamic Trees Plus integration** – Converts supported mushrooms  
+growth, falling trees, seeds, saplings, and world generation compatibility.  
+* 🍄 **Dynamic Trees Plus integration** – Converts supported mushrooms  
 and cacti into Dynamic Trees species when Dynamic Trees Plus is installed.
 
 ## Required
 
-* Dynamic Trees
+* Dynamic Trees  
 * BetterEnd by Raijin2312
 
 ## Optional
 
 * Dynamic Trees Plus
-
