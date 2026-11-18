@@ -37,7 +37,7 @@
         "max_height": 28
       }
     },
-    "mound"
+    "dtbetterend:mound"
   ],
   "model_overrides": {
     "sapling": "dynamictrees:block/smartmodel/mushroom_flat"

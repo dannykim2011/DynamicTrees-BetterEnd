@@ -2,6 +2,7 @@ package com.dannykim.dtbetterend.systems.featuregen;
 
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.block.branch.TrunkShellBlock;
+import com.dtteam.dynamictrees.block.branch.SurfaceRootBlock;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeature;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeatureConfiguration;
 import com.dtteam.dynamictrees.systems.genfeature.context.PostGenerationContext;
@@ -135,7 +136,8 @@ public final class BaseTrunkClearanceGenFeature extends GenFeature {
     }
 
     private static boolean isBlockingDecoration(final BlockState state) {
-        return !state.isAir()
+        return !state.isAir() && !state.hasBlockEntity()
+                && !(state.getBlock() instanceof SurfaceRootBlock)
                 && state.getFluidState().isEmpty()
                 && !(state.getBlock() instanceof BranchBlock)
                 && !(state.getBlock() instanceof TrunkShellBlock);
