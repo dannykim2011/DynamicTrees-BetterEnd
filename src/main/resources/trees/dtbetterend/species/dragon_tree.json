@@ -30,8 +30,8 @@
         "min_trunk_radius": 13
       }
     },
-    "mound",
-    "clear_volume"
+    "dtbetterend:mound",
+    "dtbetterend:clear_volume"
   ],
   "world_gen_acceptable_soils": [
     "shadow_grass"

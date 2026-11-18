@@ -12,7 +12,7 @@
   "growth_logic_kit": {
     "name": "dtbetterend:umbrella_tree",
     "properties": {
-      "max_height": 50
+      "max_height": 25
     }
   },
   "leaves_properties": "dtbetterend:umbrella_tree",
@@ -37,8 +37,8 @@
         "min_trunk_radius": 8
       }
     },
-    "mound",
-    "clear_volume",
+    "dtbetterend:mound",
+    "dtbetterend:clear_volume",
     {
       "name": "dtbetterend:umbrella_tree_canopy",
       "properties": {

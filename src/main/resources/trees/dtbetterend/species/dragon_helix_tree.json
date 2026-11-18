@@ -26,8 +26,8 @@
         "min_trunk_radius": 13
       }
     },
-    "mound",
-    "clear_volume"
+    "dtbetterend:mound",
+    "dtbetterend:clear_volume"
   ],
   "texture_overrides": {
     "log": "betterend:block/dragon_tree_log_side",

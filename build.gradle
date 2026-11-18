@@ -33,6 +33,18 @@ repositories {
     maven {
         url = 'https://maven.parchmentmc.org'
     }
+    exclusiveContent {
+        forRepository {
+            ivy {
+                url = uri('https://github.com/dannykim2011/DynamicTreesPlus/releases/download')
+                patternLayout {
+                    artifact '[revision]/[artifact]-[revision].[ext]'
+                }
+                metadataSources { artifact() }
+            }
+        }
+        filter { includeModule 'com.github.dannykim2011', 'dynamictreesplus' }
+    }
     mavenCentral()
 }
 
@@ -101,9 +113,8 @@ neoForge {
 }
 
 dependencies {
-    def dynamicTreesPlusJar = file('../DynamicTreesPlus 26.1.2/build/libs/dynamictreesplus-26.1.2-1.0.0.jar')
     implementation "com.dtteam.dynamictrees:dynamictrees-neoforge-${minecraft_version}:${dynamic_trees_version}"
-    compileOnly files(dynamicTreesPlusJar)
+    compileOnly "com.github.dannykim2011:dynamictreesplus:${minecraft_version}-${dynamic_trees_plus_version}"
     implementation "curse.maven:betterend-neoforge-1422294:${betterend_file_id}"
     implementation "curse.maven:bclib-neoforge-1422283:${bclib_file_id}"
     implementation "curse.maven:worldweaver-neoforge-1422284:${worldweaver_file_id}"

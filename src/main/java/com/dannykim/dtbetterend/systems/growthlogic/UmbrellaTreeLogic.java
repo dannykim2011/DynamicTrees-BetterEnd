@@ -34,7 +34,7 @@ public final class UmbrellaTreeLogic extends GrowthLogicKit {
 
     @Override
     protected GrowthLogicKitConfiguration createDefaultConfiguration() {
-        return super.createDefaultConfiguration().with(MAX_HEIGHT, 50);
+        return super.createDefaultConfiguration().with(MAX_HEIGHT, 25);
     }
 
     @Override
@@ -52,8 +52,8 @@ public final class UmbrellaTreeLogic extends GrowthLogicKit {
         final int growthSeed = UmbrellaGrowthForm.seed(context.level(), rootPos, context.signal().rand);
         final long treeHash = treeHash(rootPos, growthSeed);
         final int growthForm = UmbrellaGrowthForm.selectedForm(growthSeed);
-        final int topHeight = maxHeight - 20
-                + Math.floorMod((int) (treeHash >>> 21), 21);
+        final int topHeight = maxHeight - 10
+                + Math.floorMod((int) (treeHash >>> 21), 11);
         final int[] lean = growthForm == 2
                 ? DOUBLE_LEAN_VECTORS[Math.floorMod((int) (treeHash >>> 11), DOUBLE_LEAN_VECTORS.length)]
                 : LEAN_VECTORS[Math.floorMod((int) (treeHash >>> 11), LEAN_VECTORS.length)];
@@ -162,7 +162,7 @@ public final class UmbrellaTreeLogic extends GrowthLogicKit {
         if (y < splitHeight) return 0;
         final int canopyRadius = Mth.clamp(2 + topHeight / 9
                 + Math.max(0, trunkRadius - 8) / 8, 2, 10);
-        final int targetOffset = canopyRadius + 2;
+        final int targetOffset = Math.max(7, canopyRadius + 4);
         final int spreadHeight = Math.max(1, topHeight - splitHeight - 1);
         final int progress = Mth.clamp(y - splitHeight, 0, spreadHeight);
         return 1 + (progress * (targetOffset - 1) + spreadHeight - 1) / spreadHeight;
