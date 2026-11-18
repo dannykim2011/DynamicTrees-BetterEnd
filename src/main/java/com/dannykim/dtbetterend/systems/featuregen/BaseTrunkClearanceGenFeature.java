@@ -2,6 +2,7 @@ package com.dannykim.dtbetterend.systems.featuregen;
 
 import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
 import com.ferreusveritas.dynamictrees.block.branch.TrunkShellBlock;
+import com.ferreusveritas.dynamictrees.block.branch.SurfaceRootBlock;
 import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
 import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeatureConfiguration;
 import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGenerationContext;
@@ -135,7 +136,8 @@ public final class BaseTrunkClearanceGenFeature extends GenFeature {
     }
 
     private static boolean isBlockingDecoration(final BlockState state) {
-        return !state.isAir()
+        return !state.isAir() && !state.hasBlockEntity()
+                && !(state.getBlock() instanceof SurfaceRootBlock)
                 && state.getFluidState().isEmpty()
                 && !(state.getBlock() instanceof BranchBlock)
                 && !(state.getBlock() instanceof TrunkShellBlock);

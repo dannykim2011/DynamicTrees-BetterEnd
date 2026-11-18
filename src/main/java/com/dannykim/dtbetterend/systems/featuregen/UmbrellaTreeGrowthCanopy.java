@@ -54,10 +54,12 @@ public final class UmbrellaTreeGrowthCanopy {
                 .toList();
         final boolean refresh = crowns.stream().anyMatch(endPoint -> !hasCurrentGrowthCrown(level, endPoint));
         if (!refresh) return true;
+        final int radiusLimit = crowns.size() == 2 ? separatedRadius(crowns.get(0), crowns.get(1))
+                : configuration.get(MAX_RADIUS);
         final List<Integer> radii = crowns.stream().map(endPoint -> {
             final int height = Math.max(1, endPoint.getY() - rootPos.getY());
-            return Mth.clamp(2 + height / 9 + Math.max(0, trunkRadius - 8) / 8,
-                    2, configuration.get(MAX_RADIUS));
+            return Math.min(radiusLimit, Mth.clamp(2 + height / 9 + Math.max(0, trunkRadius - 8) / 8,
+                    2, configuration.get(MAX_RADIUS)));
         }).toList();
         for (final BlockPos endPoint : crowns) {
             clearPreviousGrowthCanopy(level, rootPos, endPoint, configuration.get(TARGET_BLOCK),
@@ -74,6 +76,12 @@ public final class UmbrellaTreeGrowthCanopy {
                     variations.get(crownIndex));
         }
         return placed > 0;
+    }
+
+    static int separatedRadius(final BlockPos first, final BlockPos second) {
+        final double distance = Math.hypot(first.getX() - second.getX(), first.getZ() - second.getZ());
+        // Worldgen membrane edges extend up to 0.6 blocks beyond the nominal radius.
+        return Math.max(0, Mth.floor(distance / 2.0 - 0.6));
     }
 
     private static void restoreGrowthCrownAnchor(final LevelAccessor level, final BlockPos endPoint,

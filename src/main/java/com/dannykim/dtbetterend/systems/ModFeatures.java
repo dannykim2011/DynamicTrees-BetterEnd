@@ -2,6 +2,8 @@ package com.dannykim.dtbetterend.systems;
 
 import com.dannykim.dtbetterend.DynamicTreesBetterEnd;
 import com.dannykim.dtbetterend.systems.featuregen.BaseTrunkClearanceGenFeature;
+import com.dannykim.dtbetterend.systems.featuregen.TreeSafeMoundGenFeature;
+import com.dannykim.dtbetterend.systems.featuregen.TreeSafeClearVolumeGenFeature;
 import com.dannykim.dtbetterend.systems.featuregen.BetterEndDecorationsGenFeature;
 import com.dannykim.dtbetterend.systems.featuregen.FlowerVinesGenFeature;
 import com.dannykim.dtbetterend.systems.featuregen.RemoveBrokenChorusGenFeature;
@@ -11,6 +13,8 @@ import com.ferreusveritas.dynamictrees.api.registry.Registry;
 import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
 
 public final class ModFeatures {
+    public static final GenFeature MOUND = new TreeSafeMoundGenFeature(DynamicTreesBetterEnd.location("mound"));
+    public static final GenFeature CLEAR_VOLUME = new TreeSafeClearVolumeGenFeature(DynamicTreesBetterEnd.location("clear_volume"));
     public static final GenFeature BASE_TRUNK_CLEARANCE =
             new BaseTrunkClearanceGenFeature(DynamicTreesBetterEnd.location("base_trunk_clearance"));
     public static final GenFeature FLOWER_VINES =
@@ -37,7 +41,7 @@ public final class ModFeatures {
 
     public static void register(final Registry<GenFeature> registry) {
         registry.registerAll(
-                BASE_TRUNK_CLEARANCE,
+                MOUND, CLEAR_VOLUME, BASE_TRUNK_CLEARANCE,
                 FLOWER_VINES,
                 REMOVE_BROKEN_CHORUS,
                 UMBRELLA_TREE_CANOPY,
